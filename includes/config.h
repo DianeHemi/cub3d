@@ -1,52 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/24 11:46:45 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/24 11:47:10 by dchampda         ###   ########.fr       */
+/*   Created: 2020/06/26 11:39:58 by dchampda          #+#    #+#             */
+/*   Updated: 2020/06/26 11:40:41 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CONFIG_H
+# define CONFIG_H
 
-# include <math.h>
-# include <mlx.h>
-# include "./config.h"  //Header parsing
-# include "./utils.h"	//Remplace la libft
-
-
-
-
+# include <fcntl.h>
+# include "./get_next_line.h"
 
 /*
-** MACROS
+*** Fichier header du parsing
 */
 
 
-
 /*
- *** Structure generale, contenant autres structs
+ *** Structure pour les infos de la map 
 */
-typedef	struct s_struct
+typedef	struct s_config
 {
-	t_config	map;
+	int		width;
+	int		height;
 
+	char	**map;
+	// int/char pour map ?
 
+	char	no_text;	//Textures des murs
+	char	so_tex;
+	char	we_tex;
+	char	ea_tex;
+	char	s_tex;
 
-}		t_cub;
+	int		f_color;	//Couleurs du plafond et sol
+	int		c_color;
 
-
-
-
+}		t_config;
 
 
 /*
 *** Fonctions
 */
+int		get_next_line(int fd, char **line);
 
 
 

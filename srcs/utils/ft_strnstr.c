@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/26 11:47:56 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/29 14:45:19 by dchampda         ###   ########.fr       */
+/*   Created: 2020/04/27 12:02:35 by dchampda          #+#    #+#             */
+/*   Updated: 2020/04/27 14:36:05 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-
-/*
-*** Compare 2 strings
-*/
-int		ft_strcmp(const char *s1, const char *s2);
-
-/*
-*** Cherche mot dans phrase
-*/
 char	*ft_strnstr(const char *s1, const char *s2, size_t len)
+{
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
-
-size_t	ft_strlen(const char *s)
-
-
-#endif
+	i = 0;
+	if (s2[i] == '\0')
+		return ((char *)s1);
+	while (s1[i] != '\0' && i < len)
+	{
+		if (s1[i] == s2[0])
+		{
+			j = i;
+			k = 0;
+			while (s1[j] == s2[k] && (j < len))
+			{
+				j++;
+				k++;
+				if (s2[k] == '\0')
+					return ((char *)&s1[i]);
+			}
+		}
+		i++;
+	}
+	return (0);
+}

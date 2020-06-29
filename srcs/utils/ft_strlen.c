@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/26 11:47:56 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/29 14:45:19 by dchampda         ###   ########.fr       */
+/*   Created: 2020/04/22 21:44:09 by dchampda          #+#    #+#             */
+/*   Updated: 2020/04/27 13:10:38 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-
-# include <stdlib.h>
-# include <unistd.h>
-
-/*
-*** Compare 2 strings
-*/
-int		ft_strcmp(const char *s1, const char *s2);
-
-/*
-*** Cherche mot dans phrase
-*/
-char	*ft_strnstr(const char *s1, const char *s2, size_t len)
-
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
+{
+	size_t len;
 
-
-#endif
+	len = 0;
+	while (s[len] != '\0')
+	{
+		len++;
+	}
+	return (len);
+}

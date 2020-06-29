@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 11:39:58 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/26 11:40:41 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:32:31 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ typedef	struct s_config
 *** Fonctions
 */
 int		get_next_line(int fd, char **line);
+
+/*
+*** Fonctions de parsing
+*/
+int		ft_parsing(char *map, int save_option t_cub3d data)
 
 
 

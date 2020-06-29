@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 11:43:49 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/29 17:18:50 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/06/29 17:44:02 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	ft_read_config(int fd, t_cub3d data)
 	check_map = 0;
 	while (get_next_line(fd, line) > 0)
 	{
-		if (ft_check_line(data, line) == 0)
-			return (0);
+		if (ft_check_line(data, line) == 1)
+			check_args += 1;
 		else if (ft_check_line(data, line) == 2)
 			check_map = ft_check_map();
 		else
-			check_args += 1;
+			rturn (0);			
 	}
 
 	/*

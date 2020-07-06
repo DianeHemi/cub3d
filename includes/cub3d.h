@@ -15,8 +15,12 @@
 
 # include <math.h>
 # include <mlx.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include "./config.h"  //Header parsing
 # include "./utils.h"	//Remplace la libft
+# include "./get_next_line.h"
 
 
 
@@ -33,13 +37,22 @@
 */
 typedef	struct s_struct
 {
-	t_config	map;
 
 
 
 }		t_cub3d;
 
 
+
+/*
+ *** Structure contenant les donnees de la mlx
+*/
+typedef	struct s_mlx
+{
+
+
+
+}		t_mlx;
 
 
 

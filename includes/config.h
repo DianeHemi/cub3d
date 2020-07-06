@@ -13,13 +13,7 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
-# include <fcntl.h>
 # include "./get_next_line.h"
-
-/*
-*** Fichier header du parsing
-*/
-
 
 /*
  *** Structure pour les infos de la map 
@@ -30,16 +24,19 @@ typedef	struct s_config
 	int		height;
 
 	char	**map;
-	// int/char pour map ?
 
-	char	no_text;	//Textures des murs
-	char	so_tex;
-	char	we_tex;
-	char	ea_tex;
-	char	s_tex;
+	char	north_tex[256];
+	char	south_tex[256];
+	char	west_tex[256];
+	char	east_tex[256];
+	char	sprite_tex[256];
 
-	int		f_color;	//Couleurs du plafond et sol
+	int		f_color;
 	int		c_color;
+
+	int		player_x;
+	int		player_y;
+	char	player_start;
 
 }		t_config;
 
@@ -52,8 +49,35 @@ int		get_next_line(int fd, char **line);
 /*
 *** Fonctions de parsing
 */
-int		ft_parsing(char *map, int save_option t_cub3d data)
+int		ft_parsing(char *map, t_config *data);
 
+/*
+*** Recuperation des donnees
+*/
+int		ft_get_config(t_config *config, char *line);
+int		ft_get_colors(t_config *config, char *line);
+int		ft_get_resolution(t_config *config, char *line);
+
+int 	ft_get_wall_north(t_config *config, char *line);
+int 	ft_get_wall_south(t_config *config, char *line);
+int		ft_get_wall_east(t_config *config, char *line);
+int 	ft_get_wall_west(t_config *config, char *line);
+int		ft_get_sprite(t_config *config, char *line);
+
+int		ft_get_map(int fd, char *line, t_config *config);
+
+
+/*
+*** Verification des donnees
+*/
+int		ft_check_config(t_config *config);
+int		ft_check_map(t_config *config);
+int		ft_open_tex(t_config *config);
+
+/*
+*** Est-ce que la ligne contient une map ?
+*/
+int		ft_is_map(char *line);
 
 
 #endif

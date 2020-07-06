@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 12:02:35 by dchampda          #+#    #+#             */
-/*   Updated: 2020/04/27 14:36:05 by dchampda         ###   ########.fr       */
+/*   Created: 2020/06/30 14:05:03 by dchampda          #+#    #+#             */
+/*   Updated: 2020/06/30 14:10:12 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t len)
+void	ft_init_config(t_config *config)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
-
-	i = 0;
-	if (s2[i] == '\0')
-		return ((char *)s1);
-	while (s1[i] != '\0' && i < len)
-	{
-		if (s1[i] == s2[0])
-		{
-			j = i;
-			k = 0;
-			while (s1[j] == s2[k] && (j < len))
-			{
-				j++;
-				k++;
-				if (s2[k] == '\0')
-					return ((char *)&s1[i]);
-			}
-		}
-		i++;
-	}
-	return (0);
+	config->width = 0;
+	config->height = 0;
+	config->north_tex[0] = '\0';
+	config->south_tex[0] = '\0';
+	config->west_tex[0] = '\0';
+	config->east_tex[0] = '\0';
+	config->sprite_tex[0] = '\0';
+	config->f_color = 0;
+	config->c_color = 0;
+	config->player_x = 0;
+	config->player_y = 0;
+	config->player_start = '0';
 }

@@ -31,7 +31,7 @@ int	ft_check_args(int argc, char **argv, int *save_option)
 		return (ft_errors("Wrong format : ./exec map.cub (--save)\n"));
 	if (argc == 3)
 	{
-		if (ft_strncmp(argv[2], "--save") != 0 
+		if (ft_strcmp(argv[2], "--save") != 0 
 			|| ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])) == 0)
 			return (ft_errors("Error : invalid arguments\n"));
 		else
@@ -49,20 +49,29 @@ int	ft_check_args(int argc, char **argv, int *save_option)
 	}
 }
 
+
+
+#include <stdio.h> //
 int	main(int argc, char **argv)
 {
-	int		save_option;
-	t_cub3d	data;
+	int			save_option;
+	t_config	config;
 
 	save_option = 0;
-	if (!(data = malloc(sizeof(t_cub)))) // ++ Malloc la structure !!
-		return (EXIT_FAILURE);	
+	ft_init_config(&config);
 	if (!ft_check_args(argc, argv, &save_option))
 		return (EXIT_FAILURE);	//Affichage des erreurs sur les arguments
-	if (!ft_parsing(argv[1]), save_option, data)
-		return (EXIT_FAILURE);    //Affichage des erreurs sur fichier et parsing sera gere dans ft_parsing + save ?
+	if (!ft_parsing(argv[1], &config))
+		return (EXIT_FAILURE);	//Affichage des erreurs sur fichier et parsing sera gere dans ft_parsing + save ?
 
 
+	printf("\n\nResolution : W %d H %d\n", config.width, config.height);
+	printf("Colors : F %d C %d\n", config.f_color, config.c_color);
+	printf("Sprite : %s\n", config.sprite_tex);
+	printf("North wall : %s\nSouth wall : %s\n", config.north_tex, config.south_tex);
+	printf("East wall : %s\nWest wall : %s\n", config.east_tex, config.west_tex);
+
+// Fonction separee pour lancer le prog et initialiser les structs ?
 
 /*
 *** Gestion ouverture fenetre et affichage

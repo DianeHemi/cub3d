@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_get_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 12:02:35 by dchampda          #+#    #+#             */
-/*   Updated: 2020/04/27 14:36:05 by dchampda         ###   ########.fr       */
+/*   Created: 2020/07/01 19:05:03 by dchampda          #+#    #+#             */
+/*   Updated: 2020/07/01 19:05:06 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t len)
+int	ft_get_map(int fd, char *line, t_config *config)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	int		read;
+	char	*map_tmp;
 
-	i = 0;
-	if (s2[i] == '\0')
-		return ((char *)s1);
-	while (s1[i] != '\0' && i < len)
+	read = 0;
+
+	//Lire les lignes 1 par 1 et les copier ?
+
+
+	//Copier contenu de la 1ere ligne qu'on a encore en stock
+	//Puis lire avec while et copier au fur et a mesure
+	while ((read = get_next_line(fd, &line)) > 0)
 	{
-		if (s1[i] == s2[0])
-		{
-			j = i;
-			k = 0;
-			while (s1[j] == s2[k] && (j < len))
-			{
-				j++;
-				k++;
-				if (s2[k] == '\0')
-					return ((char *)&s1[i]);
-			}
-		}
-		i++;
+
 	}
-	return (0);
+
+
+
+	free(line);
+	return (1);
 }

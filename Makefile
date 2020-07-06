@@ -34,49 +34,69 @@ CFLAGS	=	-Wall -Wextra -Werror
 SRCS 	+= ./srcs/cub3d.c
 
 # Parsing
-SRCS 	+= ./srcs/parsing/parsing.c
+SRCS 	+=	./srcs/parsing/parsing.c \
+			./srcs/parsing/ft_get_walls.c \
+			./srcs/parsing/ft_get_data.c \
+			./srcs/parsing/ft_get_colors.c \
+			./srcs/parsing/ft_get_map.c \
+			./srcs/parsing/check_map.c
+
+#GNL
+SRCS 	+=	./srcs/gnl/get_next_line.c \
+			./srcs/gnl/get_next_line_utils.c
 
 # bmp
-SRCS 	+= ./srcs/bmp/
+#SRCS 	+= ./srcs/bmp/
 
 # Raytracing
-SRCS 	+= ./srcs/raytracing/
+#SRCS 	+= ./srcs/raytracing/
 
 # Utils
-SRCS 	+= ./srcs/utils/
+SRCS 	+= ./srcs/utils/ft_atoi.c \
+			./srcs/utils/ft_init.c \
+			./srcs/utils/ft_split.c \
+			./srcs/utils/ft_strchr.c \
+			./srcs/utils/ft_strcmp.c \
+			./srcs/utils/ft_strlen.c \
+			./srcs/utils/ft_utils.c \
+			./srcs/utils/ft_strncpy.c \
+			./srcs/utils/ft_strnstr.c
 
 # --------- INC --------- #
 
 INCLUDES	= ./includes/
 HEADER		= $(INCLUDES)cub3d.h
-INC_ALL		= -I$(INCLUDES) -I$(MLX_DIR)
+INC_ALL		= -I$(INCLUDES) 
+# A remettre à la suite au dessus : -I$(MLX_DIR)
 
 # --------- OBJS --------- #
 
-DIR_OBJS	= ./srcs/objs
-OBJS		= $(SRCS:.c=$(DIR_OBJS).o)
+DIR_OBJS	= ./srcs/objs/
+OBJS		= $(SRCS:.c=.o)
 #OBJSBONUS	= ${BONUS:.c=.o}
 
 # --------- Compil --------- #
 
 all: $(NAME)
 
-$(NAME): $(OBJS) mlxcomp
+$(NAME): $(DIR_OBJS) $(OBJS) 
 	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@
+	# A remettre après $(OBJS) : mlxcomp
 
-.c.o: $(DIR_OBJS) $(HEADER)
-	$(CC) $(CFLAGS) $(ENV) -g -c $< -o ${<:.c=$(DIR_OBJS).o} $(INC_ALL)
+$(DIR_OBJS)/%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -g -c $< -o ${<:.c=$(DIR_OBJS).o} $(INC_ALL)
+	# A remettre après $(CFLAGS) : $(ENV)
 
 $(DIR_OBJS):
-	mkdir -p $@
+	mkdir $(DIR_OBJS)
 
-mlxcomp:
-	$(MAKE) -C $(MLX_DIR)
+#mlxcomp:
+#	$(MAKE) -C $(MLX_DIR)
 
 #bonus: ${OBJS} ${OBJSBONUS}
 
 clean:
-	$(MAKE) clean -C $(MLX_DIR)
+	#$(MAKE) clean -C $(MLX_DIR)
 	rm -R $(DIR_OBJS)
 
 fclean: clean
@@ -85,7 +105,7 @@ fclean: clean
 re: fclean
 	$(MAKE)
 
-cleanbmp:
-	rm bmp_saved/Cub3D_*
+#cleanbmp:
+#	rm bmp_saved/Cub3D_*
 
-.PHONY all clean fclean re mlxcomp cleanbmp
+.PHONY : all clean fclean re mlxcomp cleanbmp

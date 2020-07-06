@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../../includes/cub3d.h"
 
 char	*read_file(char *buffer, int fd, int *nb_letters)
 {

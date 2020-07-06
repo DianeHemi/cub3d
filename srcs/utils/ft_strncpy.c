@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 12:02:35 by dchampda          #+#    #+#             */
-/*   Updated: 2020/04/27 14:36:05 by dchampda         ###   ########.fr       */
+/*   Created: 2020/07/02 16:04:35 by dchampda          #+#    #+#             */
+/*   Updated: 2020/07/02 16:04:36 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t len)
+char	*ft_strncpy(char *src, char *dest, int len)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	int i;
 
 	i = 0;
-	if (s2[i] == '\0')
-		return ((char *)s1);
-	while (s1[i] != '\0' && i < len)
+	while (src[i] != '\0' && len > 0)
 	{
-		if (s1[i] == s2[0])
-		{
-			j = i;
-			k = 0;
-			while (s1[j] == s2[k] && (j < len))
-			{
-				j++;
-				k++;
-				if (s2[k] == '\0')
-					return ((char *)&s1[i]);
-			}
-		}
+		dest[i] = src[i];
 		i++;
+		len--;
 	}
-	return (0);
+	dest[i] = '\0';
+	return (dest);
 }

@@ -10,4 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/cub3d.h"
 
+int	ft_check_map(t_config *config)
+{
+	(void)config;
+
+
+	return (1);
+}

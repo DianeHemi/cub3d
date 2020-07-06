@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/27 12:02:35 by dchampda          #+#    #+#             */
-/*   Updated: 2020/04/27 14:36:05 by dchampda         ###   ########.fr       */
+/*   Created: 2020/04/22 21:44:44 by dchampda          #+#    #+#             */
+/*   Updated: 2020/04/22 22:12:19 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t len)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
-
-	i = 0;
-	if (s2[i] == '\0')
-		return ((char *)s1);
-	while (s1[i] != '\0' && i < len)
+	while (*s)
 	{
-		if (s1[i] == s2[0])
-		{
-			j = i;
-			k = 0;
-			while (s1[j] == s2[k] && (j < len))
-			{
-				j++;
-				k++;
-				if (s2[k] == '\0')
-					return ((char *)&s1[i]);
-			}
-		}
-		i++;
+		if (c == *s)
+			return ((char *)s);
+		s++;
 	}
-	return (0);
+	if (c == 0)
+		return ((char *)s);
+	else
+		return (NULL);
 }

@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/13 12:20:56 by dchampda          #+#    #+#             */
-/*   Updated: 2020/07/07 15:31:20 by dchampda         ###   ########.fr       */
+/*   Created: 2020/04/28 13:46:26 by dchampda          #+#    #+#             */
+/*   Updated: 2020/07/07 12:17:52 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../../includes/cub3d.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
-#endif
+char	*ft_strdup(const char *s)
+{
+	char	*copy;
+	size_t	i;
 
-int		get_next_line(int fd, char **line);
-int		find_n(char *buffer, char c);
-size_t	ft_strlen(char const *str);
-char	*ft_strndup(char *str, int len);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*copy_after_n(char *str, int len);
-
-#endif
+	i = 0;
+	if (!(copy = malloc(sizeof(char) * (ft_strlen(s) + 1))))
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		copy[i] = s[i];
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy);
+}

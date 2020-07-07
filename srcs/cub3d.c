@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 11:45:57 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/29 16:31:21 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/07/07 15:51:08 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ int	main(int argc, char **argv)
 	printf("Sprite : %s\n", config.sprite_tex);
 	printf("North wall : %s\nSouth wall : %s\n", config.north_tex, config.south_tex);
 	printf("East wall : %s\nWest wall : %s\n", config.east_tex, config.west_tex);
+	printf("\n");
+	for (int i = 0; config.map[i] != '\0'; i++)
+		printf("Map : %s\n", config.map[i]);
+	printf("\n\n");
+	
 
 // Fonction separee pour lancer le prog et initialiser les structs ?
 

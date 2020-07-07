@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 11:43:49 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/29 17:44:02 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/07/07 15:50:42 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	ft_check_config(t_config *config)
 
 	return (1);
 }
-
 
 int		ft_is_map(char *line)
 {
@@ -96,13 +95,20 @@ int	ft_parsing(char *map, t_config *config)
 		free(line);
 	}
 
+	//if (!ft_check_config)
+	//{
+	//	close(fd);
+	//	return (ft_errors("Error : Configuration is invalid.\n"));
+	//}
+
 	
-	ft_get_map(fd, line, config); //A faire
+//	if (ft_is_map(line))
+		ft_get_map(fd, line, config); //A faire
+//	else
+//		return (ft_errors("Error : Map is missing.\n"));
 
 
 	close(fd);
-	//if (!ft_check_config)
-	//	return (ft_errors("Error : Configuration is invalid.\n"));
 	//else
 		return (1);
 }

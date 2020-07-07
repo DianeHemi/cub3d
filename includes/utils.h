@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 11:47:56 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/29 14:45:19 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:31:53 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ size_t	ft_strlen(const char *s);
 int		ft_atoi(const char *nptr);
 char	**ft_split(char const *s, char c);
 char	*ft_strncpy(char *src, char *dest, int len);
+char	*ft_strdup(const char *s);
 
 /*
 *** Initialisation des structures

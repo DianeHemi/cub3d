@@ -6,7 +6,7 @@
 #    By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 14:17:45 by dchampda          #+#    #+#              #
-#    Updated: 2020/07/07 16:31:59 by dchampda         ###   ########.fr        #
+#    Updated: 2020/07/07 17:50:27 by dchampda         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS 	+= ./srcs/utils/ft_atoi.c \
 			./srcs/utils/ft_utils.c \
 			./srcs/utils/ft_strncpy.c \
 			./srcs/utils/ft_strdup.c \
+			./srcs/utils/ft_strjoin2.c \
 			./srcs/utils/ft_strnstr.c
 
 # --------- INC --------- #

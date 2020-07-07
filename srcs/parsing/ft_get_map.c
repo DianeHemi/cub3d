@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 19:05:03 by dchampda          #+#    #+#             */
-/*   Updated: 2020/07/07 17:46:21 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/07/07 17:51:16 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,9 @@ int	ft_get_map(int fd, char *line, t_config *config)
 	//Lire les lignes 1 par 1 et les copier ?
 	while ((read = get_next_line(fd, &line)) > 0)
 	{
-		line[ft_strlen(line)] = '\n';
-		
-		map_tmp = ft_strjoin(map_tmp, line);
-
+		map_tmp = ft_strjoin2(map_tmp, line);
 		free(line);		
 	}
-
 	
 		config->map = ft_split(map_tmp, '\n');
 

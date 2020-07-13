@@ -1,14 +1,12 @@
 R 640 500
-NO ./textures/WoodbrickD.XPM
-SO ./textures/wood.XPM
-WE ./textures/WoodbrickeagleD.XPM
-EA ./textures/WoodbrickswasD.XPM
+NO ./textures/BluegreyD.XPM
+WE ./textures/BluegreyswasD.XPM
+SO ./textures/BluegreyeagleD.XPM
+EA ./textures/BookshelfD.XPM
 
-S ./textures/W3d_finalarmor.XPM
+S ./texture/pillar.XPM
 F 50,50,140
 C 0,0,50
-
-
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 0 0 0 0 0 0 2 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1

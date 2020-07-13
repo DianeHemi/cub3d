@@ -37,12 +37,12 @@ int ft_rgb_to_int(char *line)
 	while (color[i])
 		i++;
 	if (i > 3)
-		return (ft_errors("Wrong color format, must be 'R,G,B'.\n"));
+		return (ft_errors("Wrong color format, it must be 'R,G,B'.\n"));
 	i = 0;
 	while (i < 3)
 	{
 		if (color[i] == NULL)
-			return (ft_errors("Wrong color format, must be 'R,G,B'.\n"));
+			return (ft_errors("Wrong color format, it must be 'R,G,B'.\n"));
 		else
 			nb[i] = ft_atoi(color[i]);
 		i++;

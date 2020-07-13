@@ -12,25 +12,20 @@
 
 #include "../../includes/cub3d.h"
 
-
-
-
 int	ft_check_config(t_config *config)
 {
-	//Check resolution
 	if (config->width <= 0 || config->height <= 0)
 		return (ft_errors("Resolution incorrect.\n"));
-	config->width = config->width > 2560 ? 2560 : config->width;
-	config->height = config->height > 1440 ? 1440 : config->height;
-
-	//Check colors
+	if (config->width > 2560)
+		config->width = 2560;
+	if (config->height > 1440)
+		config->height = 1440;
 	if (config->f_color < 0 || config->c_color < 0)
 		return (ft_errors("Floor or ceiling color is incorrect.\n"));
-
-	//Check ouverture des textures
-	if (ft_open_tex(config))
-		return (ft_errors("Cannot open textures\n"));
-
+	if (!ft_open_tex(config))
+		return (ft_errors("Cannot open textures.\n"));
+	if (!ft_check_map(config))
+		return (ft_errors("Map is incorrect.\n"));		
 	return (1);
 }
 
@@ -93,22 +88,11 @@ int	ft_parsing(char *map, t_config *config)
 			return (ft_errors("Error : Configuration is invalid.\n"));
 		}
 		free(line);
-	}
-
-	//if (!ft_check_config)
-	//{
-	//	close(fd);
-	//	return (ft_errors("Error : Configuration is invalid.\n"));
-	//}
-
-	
-//	if (ft_is_map(line))
-		ft_get_map(fd, line, config); //A faire
-//	else
-//		return (ft_errors("Error : Map is missing.\n"));
-
-
+	}	
+	if (ft_is_map(line))
+		ft_get_map(fd, line, config);
+	else
+		return (ft_errors("Error : Map is missing.\n"));
 	close(fd);
-	//else
-		return (1);
+	return (1);
 }

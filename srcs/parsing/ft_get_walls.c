@@ -25,7 +25,7 @@ int ft_get_wall_north(t_config *config, char *line)
 	j = i;
 	while (line[j] != ' ' && line[j] != '\0')
 		j++;
-	ft_strncpy(&line[i], config->north_tex, j - i);
+	ft_strncpy(&line[i], config->north_tex, j - i - 1);
 	return (1);
 }
 
@@ -42,7 +42,7 @@ int ft_get_wall_south(t_config *config, char *line)
 	j = i;
 	while (line[j] != ' ' && line[j] != '\0')
 		j++;
-	ft_strncpy(&line[i], config->south_tex, j - i);
+	ft_strncpy(&line[i], config->south_tex, j - i - 1);
 	return (1);
 }
 
@@ -60,7 +60,7 @@ int ft_get_wall_east(t_config *config, char *line)
 	j = i;
 	while (line[j] != ' ' && line[j] != '\0')
 		j++;
-	ft_strncpy(&line[i], config->east_tex, j - i);
+	ft_strncpy(&line[i], config->east_tex, j - i - 1);
 	return (1);
 }
 
@@ -77,6 +77,6 @@ int ft_get_wall_west(t_config *config, char *line)
 	j = i;
 	while (line[j] != ' ' && line[j] != '\0')
 		j++;
-	ft_strncpy(&line[i], config->west_tex, j - i);
+	ft_strncpy(&line[i], config->west_tex, j - i - 1);
 	return (1);
 }

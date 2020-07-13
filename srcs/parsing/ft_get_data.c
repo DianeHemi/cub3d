@@ -12,6 +12,20 @@
 
 #include "../../includes/cub3d.h"
 
+int ft_get_player_pos(t_config *config, int y, int x)
+{
+	if (config->player_start == '0')
+	{
+		config->player_x = x;
+		config->player_y = y;
+		config->player_start = config->map[y][x];
+		config->map[y][x] = '0';
+	}
+	else
+		return (ft_errors("Only one camera allowed.\n"));
+	return (1);
+}
+
 int	ft_get_resolution(t_config *config, char *line)
 {
 	int i;
@@ -41,15 +55,23 @@ int	ft_get_sprite(t_config *config, char *line)
 	j = i;
 	while (line[j] != ' ' && line[j] != '\0')
 		j++;
-	ft_strncpy(&line[i], config->sprite_tex, j - i);
+	ft_strncpy(&line[i], config->sprite_tex, j - i - 1);
 	return (1);
 }
 
-
-
 int	ft_open_tex(t_config *config)
 {
-	(void)config;
+	int fd;
 
+	if ((fd = open(config->north_tex, O_RDONLY)) < 0)
+		return (0);
+	if ((fd = open(config->south_tex, O_RDONLY)) < 0)
+		return (0);
+	if ((fd = open(config->east_tex, O_RDONLY)) < 0)
+		return (0);
+	if ((fd = open(config->west_tex, O_RDONLY)) < 0)
+		return (0);
+	if ((fd = open(config->sprite_tex, O_RDONLY)) < 0)
+		return (0);
 	return (1);
 }

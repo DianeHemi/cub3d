@@ -17,27 +17,23 @@ int	ft_get_map(int fd, char *line, t_config *config)
 	int		read;
 	char	*map_tmp;
 	char	*tmp;
-	int		i;
 
-	i = 0;
-
-	//Copier contenu de la 1ere ligne qu'on a encore en stock
-	map_tmp = ft_strdup(line);
-	map_tmp[ft_strlen(map_tmp)] = '\n';
+	if (!(map_tmp = malloc(sizeof(char))))
+		return (ft_errors("Memory allocation failed.\n"));
+	map_tmp[0] = 0;
+	tmp = map_tmp;
+	map_tmp = ft_strjoin(map_tmp, line);
+	free(tmp);
 	free(line);
-
-	
-	//Puis lire avec while et copier au fur et a mesure
-	//Lire les lignes 1 par 1 et les copier ?
 	while ((read = get_next_line(fd, &line)) > 0)
 	{
 		tmp = map_tmp;
-		map_tmp = ft_strjoin2(map_tmp, line);
+		map_tmp = ft_strjoin(map_tmp, line);
 		free(tmp);
 		free(line);		
 	}
-	
-		config->map = ft_split(map_tmp, '\n');
-
+	free(line);
+	config->map = ft_split(map_tmp, '\n');
+	free(map_tmp);
 	return (1);
 }

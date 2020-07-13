@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 11:43:49 by dchampda          #+#    #+#             */
-/*   Updated: 2020/07/07 15:50:42 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/07/13 17:34:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	ft_check_config(t_config *config)
 		config->height = 1440;
 	if (config->f_color < 0 || config->c_color < 0)
 		return (ft_errors("Floor or ceiling color is incorrect.\n"));
+	if (config->north_tex[0] == '\0' || config->south_tex[0] == '\0'
+		|| config->east_tex[0] == '\0' || config->west_tex[0] == '\0'
+		|| config->sprite_tex[0] == '\0')
+		return (ft_errors("Textures are missing.\n"));
 	if (!ft_open_tex(config))
 		return (ft_errors("Cannot open textures.\n"));
 	if (!ft_check_map(config))

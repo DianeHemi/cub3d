@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 14:58:39 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/30 14:58:56 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/07/13 17:28:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ int	ft_open_tex(t_config *config)
 	int fd;
 
 	if ((fd = open(config->north_tex, O_RDONLY)) < 0)
-		return (0);
+		return (1);
 	if ((fd = open(config->south_tex, O_RDONLY)) < 0)
-		return (0);
+		return (1);
 	if ((fd = open(config->east_tex, O_RDONLY)) < 0)
-		return (0);
+		return (1);
 	if ((fd = open(config->west_tex, O_RDONLY)) < 0)
-		return (0);
+		return (1);
 	if ((fd = open(config->sprite_tex, O_RDONLY)) < 0)
-		return (0);
+		return (1);
 	return (1);
 }

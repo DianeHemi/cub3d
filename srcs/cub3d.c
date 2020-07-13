@@ -36,7 +36,7 @@ int	ft_check_args(int argc, char **argv, int *save_option)
 			return (ft_errors("Error : invalid arguments\n"));
 		else
 		{
-			*save_option = 1; //save a gerer dans autre fonction
+			*save_option = 1;
 			return (1);
 		}
 	}
@@ -56,6 +56,7 @@ int	main(int argc, char **argv)
 {
 	int			save_option;
 	t_config	config;
+	t_mlx		mlx;
 
 	save_option = 0;
 	ft_init_config(&config);
@@ -63,24 +64,54 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);	//Affichage des erreurs sur les arguments
 	if (!ft_parsing(argv[1], &config))
 		return (EXIT_FAILURE);	//Affichage des erreurs sur fichier et parsing sera gere dans ft_parsing + save ?
+	if (!ft_check_config(&config))
+	{
+		ft_free_tab(config.map);
+		return (ft_errors("Error : Configuration is invalid.\n"));
+	}
+
+	//if (save == 1)
+	//	ft_save(&config);
+
+
+	ft_launch_prog(&config, &mlx);
+
+
+
+
+	/*
+	CONFIG : Tout mettre dans fonction externe, style "init_config" ?
+
+	ICI : Fonction qui s'occupera de lancer le programme.
+		ft_launch_prog
+	*/
+
+
 
 
 	printf("\n\nResolution : W %d H %d\n", config.width, config.height);
 	printf("Colors : F %d C %d\n", config.f_color, config.c_color);
-	printf("Sprite : %s\n", config.sprite_tex);
-	printf("North wall : %s\nSouth wall : %s\n", config.north_tex, config.south_tex);
-	printf("East wall : %s\nWest wall : %s\n", config.east_tex, config.west_tex);
+	printf("Sprite : '%s'\n", config.sprite_tex);
+	printf("North wall : '%s'\nSouth wall : '%s'\n", config.north_tex, config.south_tex);
+	printf("East wall : '%s'\nWest wall : '%s'\n", config.east_tex, config.west_tex);
 	printf("\n");
 	for (int i = 0; config.map[i] != '\0'; i++)
 		printf("Map : %s\n", config.map[i]);
+	printf("Player position : x-%d y-%d\n", config.player_x, config.player_y);
+	printf("Player orientation : %c\n", config.player_start);
 	printf("\n\n");
 	
 
-// Fonction separee pour lancer le prog et initialiser les structs ?
 
 /*
 *** Gestion ouverture fenetre et affichage
 */
+
+
+//A mettre quelque part
+ft_free_tab(config.map);
+
+
 
 	return (0);
 }

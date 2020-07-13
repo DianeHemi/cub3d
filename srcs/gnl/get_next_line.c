@@ -47,7 +47,7 @@ int		read_buffer(char *buffer, char **line)
 			i++;
 		if (buffer[i] == '\n')
 		{
-			*line = ft_strndup(buffer, i);
+			*line = ft_strndup(buffer, i + 1);
 			return (1);
 		}
 		else

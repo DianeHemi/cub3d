@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "../../includes/cub3d.h"
 
 char		*ft_strndup(char *str, int len)
 {

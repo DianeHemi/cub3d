@@ -19,7 +19,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "./config.h"  //Header parsing
-# include "./utils.h"	//Remplace la libft
+# include "./utils.h"	//Remplace la libft + utilitaires
+# include "./raycasting.h" //Moteur du jeu
 # include "./get_next_line.h"
 
 
@@ -41,18 +42,6 @@ typedef	struct s_struct
 
 
 }		t_cub3d;
-
-
-
-/*
- *** Structure contenant les donnees de la mlx
-*/
-typedef	struct s_mlx
-{
-
-
-
-}		t_mlx;
 
 
 

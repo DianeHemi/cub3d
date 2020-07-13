@@ -30,7 +30,6 @@ int		ft_atoi(const char *nptr);
 char	**ft_split(char const *s, char c);
 char	*ft_strncpy(char *src, char *dest, int len);
 char	*ft_strdup(const char *s);
-char	*ft_strjoin2(char const *s1, char const *s2);
 
 /*
 *** Initialisation des structures

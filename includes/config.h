@@ -20,25 +20,25 @@
 */
 typedef	struct s_config
 {
-	int		width;
-	int		height;
+	int			width;
+	int			height;
 
-	char	**map;
+	char		**map;
 
-	char	north_tex[256];
-	char	south_tex[256];
-	char	west_tex[256];
-	char	east_tex[256];
-	char	sprite_tex[256];
+	char		north_tex[256];
+	char		south_tex[256];
+	char		west_tex[256];
+	char		east_tex[256];
+	char		sprite_tex[256];
 
-	int		f_color;
-	int		c_color;
+	int			f_color;
+	int			c_color;
 
-	int		player_x;
-	int		player_y;
-	char	player_start;
+	int			player_x;
+	int			player_y;
+	char		player_start;
 
-}		t_config;
+}				t_config;
 
 
 /*
@@ -65,7 +65,7 @@ int 	ft_get_wall_west(t_config *config, char *line);
 int		ft_get_sprite(t_config *config, char *line);
 
 int		ft_get_map(int fd, char *line, t_config *config);
-
+int 	ft_get_player_pos(t_config *config, int y, int x);
 
 /*
 *** Verification des donnees

@@ -16,7 +16,6 @@ void	ft_init_config(t_config *config)
 {
 	config->width = 0;
 	config->height = 0;
-	config->map = malloc(sizeof(char *));
 	config->north_tex[0] = '\0';
 	config->south_tex[0] = '\0';
 	config->west_tex[0] = '\0';

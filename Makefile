@@ -16,7 +16,7 @@ NAME	=	Cub3D
 UNAME := $(shell uname)
 ifeq ($(UNAME), Linux)
 	MLX_DIR	= ./minilibx-linux
-	MLX 	= -L $(MLX_DIR) -lmlx -lX11 -lXext -lm -lbsd
+	MLX 	= -L $(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 	ENV		= -D LINUX
 	CC		=	clang
 else
@@ -49,7 +49,7 @@ SRCS 	+=	./srcs/gnl/get_next_line.c \
 #SRCS 	+= ./srcs/bmp/
 
 # Raytracing
-#SRCS 	+= ./srcs/raytracing/
+SRCS 	+= ./srcs/raycasting/ft_launch_prog.c
 
 # Utils
 SRCS 	+= ./srcs/utils/ft_atoi.c \
@@ -61,15 +61,14 @@ SRCS 	+= ./srcs/utils/ft_atoi.c \
 			./srcs/utils/ft_utils.c \
 			./srcs/utils/ft_strncpy.c \
 			./srcs/utils/ft_strdup.c \
-			./srcs/utils/ft_strjoin2.c \
 			./srcs/utils/ft_strnstr.c
 
 # --------- INC --------- #
 
 INCLUDES	= ./includes/
 HEADER		= $(INCLUDES)cub3d.h
-INC_ALL		= -I$(INCLUDES) 
-# A remettre à la suite au dessus : -I$(MLX_DIR)
+INC_ALL		= -I$(INCLUDES) -I$(MLX_DIR)
+# A remettre à la suite au dessus : 
 
 # --------- OBJS --------- #
 
@@ -81,24 +80,22 @@ OBJS		= $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(DIR_OBJS) $(OBJS) 
-	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@
-	# A remettre après $(OBJS) : mlxcomp
+$(NAME): $(DIR_OBJS) $(OBJS) mlxcomp
+	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@ $(MLX)
 
 $(DIR_OBJS)/%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -g -c $< -o ${<:.c=$(DIR_OBJS).o} $(INC_ALL)
-	# A remettre après $(CFLAGS) : $(ENV)
+	$(CC) $(CFLAGS) $(ENV) -g -c $< -o ${<:.c=$(DIR_OBJS).o} $(INC_ALL)
 
 $(DIR_OBJS):
 	mkdir $(DIR_OBJS)
 
-#mlxcomp:
-#	$(MAKE) -C $(MLX_DIR)
+mlxcomp:
+	$(MAKE) -C $(MLX_DIR)
 
 #bonus: ${OBJS} ${OBJSBONUS}
 
 clean:
-	#$(MAKE) clean -C $(MLX_DIR)
+	$(MAKE) clean -C $(MLX_DIR)
 	rm -R $(DIR_OBJS)
 
 fclean: clean

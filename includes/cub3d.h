@@ -14,14 +14,14 @@
 # define CUB3D_H
 
 # include <math.h>
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "./config.h"  //Header parsing
-# include "./utils.h"	//Remplace la libft + utilitaires
-# include "./raycasting.h" //Moteur du jeu
-# include "./get_next_line.h"
+# include "config.h"  //Header parsing
+# include "utils.h"	//Remplace la libft + utilitaires
+# include "raycasting.h" //Moteur du jeu
+# include "get_next_line.h"
 
 
 

@@ -13,7 +13,7 @@
 #ifndef CONFIG_H
 # define CONFIG_H
 
-# include "./get_next_line.h"
+# include "get_next_line.h"
 
 /*
  *** Structure pour les infos de la map 
@@ -37,6 +37,8 @@ typedef	struct s_config
 	int			player_x;
 	int			player_y;
 	char		player_start;
+
+	int			nb_sprite;
 
 }				t_config;
 

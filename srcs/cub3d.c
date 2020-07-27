@@ -58,6 +58,7 @@ int	main(int argc, char **argv)
 	t_config	config;
 	t_mlx		mlx;
 
+
 	save_option = 0;
 	ft_init_config(&config);
 	if (!ft_check_args(argc, argv, &save_option))
@@ -74,17 +75,10 @@ int	main(int argc, char **argv)
 	//	ft_save(&config);
 
 
-	ft_launch_prog(&config, &mlx);
+	if (!ft_launch_prog(&config, &mlx))
+		return (EXIT_FAILURE);
 
 
-
-
-	/*
-	CONFIG : Tout mettre dans fonction externe, style "init_config" ?
-
-	ICI : Fonction qui s'occupera de lancer le programme.
-		ft_launch_prog
-	*/
 
 
 
@@ -95,22 +89,23 @@ int	main(int argc, char **argv)
 	printf("North wall : '%s'\nSouth wall : '%s'\n", config.north_tex, config.south_tex);
 	printf("East wall : '%s'\nWest wall : '%s'\n", config.east_tex, config.west_tex);
 	printf("\n");
-	for (int i = 0; config.map[i] != '\0'; i++)
+	for (int i = 0; config.map[i]; i++)
 		printf("Map : %s\n", config.map[i]);
 	printf("Player position : x-%d y-%d\n", config.player_x, config.player_y);
 	printf("Player orientation : %c\n", config.player_start);
+	printf("Nombre de sprites : %d\n", config.nb_sprite);
 	printf("\n\n");
 	
 
 
+
+//ft_exit_game
+
+
 /*
-*** Gestion ouverture fenetre et affichage
-*/
-
-
-//A mettre quelque part
+//A mettre dans fonction d'exit
 ft_free_tab(config.map);
-
+*/
 
 
 	return (0);

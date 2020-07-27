@@ -27,3 +27,51 @@ void	ft_init_config(t_config *config)
 	config->player_y = 0;
 	config->player_start = '0';
 }
+
+
+
+
+
+
+void	ft_set_dir(t_ray *ray, int x, int y)
+{
+	ray->dir_x = x;
+	ray->dir_y = y;
+}
+
+
+void	ft_init_player_pos(t_config *config, t_ray *ray)
+{
+	ray->plane_x = 0.66;
+	ray->plane_y = 0;
+
+	if (config->player_start == 'N')
+		ft_set_dir(ray, 0, -1);
+	else if (config->player_start == 'S')
+	{
+		ft_set_dir(ray, 0, 1);
+		ray->plane_x = -0.66;
+	}
+	else if (config->player_start == 'E')
+	{
+		ft_set_dir(ray, 1, 0);
+		ray->plane_x = 0;
+		ray->plane_y = 0.66;
+	}
+	else if (config->player_start == 'W')
+	{
+		ft_set_dir(ray, -1, 0);
+		ray->plane_x = 0;
+		ray->plane_y = -0.66;
+	}
+}
+
+
+
+
+void	ft_init_player_struct(t_config *config)
+{
+	(void)config;
+	//(void)player;
+}
+

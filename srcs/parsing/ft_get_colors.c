@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int ft_rgb_conv(int nb[4], int i)
+int ft_rgb_conv(int nb[3], int i)
 {
 	if (nb[0] > 255 || nb[1] > 255 || nb[2] > 255)
 		return (-1);

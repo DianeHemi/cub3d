@@ -19,17 +19,17 @@ int ft_check_top_bot(t_config *config)
 
 	y = 0;
 	x = 0;
-	while (config->map[0][x] != '\0')
+	while (config->map[0][x])
 	{
 		if (config->map[0][x] != ' ' && config->map[0][x] != '1')
 			return (0);
 		x++;
 	}
-	while (config->map[y] != '\0')
+	while (config->map[y])
 		y++;
 	x = 0;
 	y--;
-	while (config->map[y][x] != '\0')
+	while (config->map[y][x])
 	{
 		if (config->map[y][x] != ' ' && config->map[y][x] != '1')
 			return (0);
@@ -46,7 +46,7 @@ int ft_check_sides(t_config *config)
 
 	y = 0;
 	first = 0;
-	while (config->map[y] != '\0')
+	while (config->map[y])
 	{
 		while (config->map[y][first] == ' ')
 			first++;
@@ -66,10 +66,10 @@ int ft_check_middle(t_config *config)
 	int x;
 
 	y = 0;
-	while (config->map[y] != '\0')
+	while (config->map[y])
 	{
 		x = 0;
-		while (config->map[y][x] != '\0')
+		while (config->map[y][x])
 		{
 			if ((config->map[y][x] == '0' && config->map[y + 1][x] == ' ')
 				|| (config->map[y][x] == '0' && config->map[y - 1][x] == ' '))
@@ -96,10 +96,10 @@ int	ft_check_map(t_config *config)
 	if (!ft_check_top_bot(config) || !ft_check_sides(config)
 		|| !ft_check_middle(config))
 		return (ft_errors("Map is not closed.\n"));
-	while (config->map[y] != '\0')
+	while (config->map[y])
 	{
 		x = 0;
-		while (config->map[y][x] != '\0')
+		while (config->map[y][x])
 		{
 			if (!ft_strchr(" 012NSEW", config->map[y][x]))
 				return (ft_errors("Invalid character in map.\n"));

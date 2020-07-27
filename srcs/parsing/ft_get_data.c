@@ -64,14 +64,14 @@ int	ft_open_tex(t_config *config)
 	int fd;
 
 	if ((fd = open(config->north_tex, O_RDONLY)) < 0)
-		return (1);
+		return (0);
 	if ((fd = open(config->south_tex, O_RDONLY)) < 0)
-		return (1);
+		return (0);
 	if ((fd = open(config->east_tex, O_RDONLY)) < 0)
-		return (1);
+		return (0);
 	if ((fd = open(config->west_tex, O_RDONLY)) < 0)
-		return (1);
+		return (0);
 	if ((fd = open(config->sprite_tex, O_RDONLY)) < 0)
-		return (1);
+		return (0);
 	return (1);
 }

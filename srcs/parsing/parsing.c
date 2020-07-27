@@ -29,7 +29,9 @@ int	ft_check_config(t_config *config)
 	if (!ft_open_tex(config))
 		return (ft_errors("Cannot open textures.\n"));
 	if (!ft_check_map(config))
-		return (ft_errors("Map is incorrect.\n"));		
+		return (ft_errors("Map is incorrect.\n"));
+	if (config->player_start == '0')	
+		return (ft_errors("Player is missing.\n"));
 	return (1);
 }
 
@@ -98,5 +100,6 @@ int	ft_parsing(char *map, t_config *config)
 	else
 		return (ft_errors("Error : Map is missing.\n"));
 	close(fd);
+	config->nb_sprite = ft_get_nb_sprite(config);
 	return (1);
 }

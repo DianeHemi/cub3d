@@ -25,7 +25,7 @@ int	ft_errors(char *str)
 	return (0);
 }
 
-int	ft_check_args(int argc, char **argv, int *save_option)
+int	ft_check_args(int argc, char **argv, int *save_opt)
 {
 	if (argc < 2 || argc > 3)
 		return (ft_errors("Wrong format : ./exec map.cub (--save)\n"));
@@ -36,7 +36,7 @@ int	ft_check_args(int argc, char **argv, int *save_option)
 			return (ft_errors("Error : invalid arguments\n"));
 		else
 		{
-			*save_option = 1;
+			*save_opt = 1;
 			return (1);
 		}
 	}
@@ -54,14 +54,14 @@ int	ft_check_args(int argc, char **argv, int *save_option)
 #include <stdio.h> //
 int	main(int argc, char **argv)
 {
-	int			save_option;
+	int			save_opt;
 	t_config	config;
 	t_mlx		mlx;
 
 
-	save_option = 0;
+	save_opt = 0;
 	ft_init_config(&config);
-	if (!ft_check_args(argc, argv, &save_option))
+	if (!ft_check_args(argc, argv, &save_opt))
 		return (EXIT_FAILURE);	//Affichage des erreurs sur les arguments
 	if (!ft_parsing(argv[1], &config))
 		return (EXIT_FAILURE);	//Affichage des erreurs sur fichier et parsing sera gere dans ft_parsing + save ?
@@ -71,11 +71,8 @@ int	main(int argc, char **argv)
 		return (ft_errors("Error : Configuration is invalid.\n"));
 	}
 
-	//if (save == 1)
-	//	ft_save(&config);
 
-
-	if (!ft_launch_prog(&config, &mlx))
+	if (!ft_launch_prog(&config, &mlx, save_opt))
 		return (EXIT_FAILURE);
 
 
@@ -96,17 +93,6 @@ int	main(int argc, char **argv)
 	printf("Nombre de sprites : %d\n", config.nb_sprite);
 	printf("\n\n");
 	
-
-
-
-//ft_exit_game
-
-
-/*
-//A mettre dans fonction d'exit
-ft_free_tab(config.map);
-*/
-
 
 	return (0);
 }

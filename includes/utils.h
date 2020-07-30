@@ -39,7 +39,7 @@ void	ft_bzero(void *s, size_t n);
 */
 void 	ft_init_config(t_config *config);
 void	ft_init_player_pos(t_config *config, t_ray *ray);
-void	ft_set_dir(t_ray *ray, int x, int y);
+void	ft_set_dir(t_ray *ray, double x, double y);
 int 	ft_init_textures(t_config *data, t_game *game,
 						t_texture *texture, t_mlx *mlx);
 
@@ -48,9 +48,10 @@ void	ft_get_pos_sprite(t_sprite *sprite, t_config *data, t_game *game);
 int 	ft_get_nb_sprite(t_config *data);
 
 
-void	ft_init_store(t_config *data, t_ray *ray, 
+int		ft_init_store(t_config *data, t_ray *ray, 
 						t_mlx *mlx, t_game *game);
 void	ft_init_tex_struct(t_game *game);
+void	ft_init_move(t_move *move, t_game *game);
 
 /*
 *** Liberation memoire sur tableaux

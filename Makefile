@@ -49,7 +49,11 @@ SRCS 	+=	./srcs/gnl/get_next_line.c \
 #SRCS 	+= ./srcs/bmp/
 
 # Raytracing
-SRCS 	+= ./srcs/raycasting/ft_launch_prog.c
+SRCS 	+= ./srcs/raycasting/ft_launch_prog.c \
+			./srcs/raycasting/raycasting.c \
+			./srcs/raycasting/ft_draw.c \
+			./srcs/raycasting/ft_move.c \
+			./srcs/raycasting/ft_main_loop.c
 
 # Utils
 SRCS 	+= ./srcs/utils/ft_atoi.c \
@@ -61,6 +65,10 @@ SRCS 	+= ./srcs/utils/ft_atoi.c \
 			./srcs/utils/ft_utils.c \
 			./srcs/utils/ft_strncpy.c \
 			./srcs/utils/ft_strdup.c \
+			./srcs/utils/ft_calloc.c \
+			./srcs/utils/ft_bzero.c \
+			./srcs/utils/ft_init_texture_sprite.c \
+			./srcs/utils/ft_storage.c \
 			./srcs/utils/ft_strnstr.c
 
 # --------- INC --------- #

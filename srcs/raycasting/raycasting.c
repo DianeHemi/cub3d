@@ -6,7 +6,7 @@
 /*   By: diane <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 19:14:01 by diane             #+#    #+#             */
-/*   Updated: 2020/07/25 19:14:04 by diane            ###   ########.fr       */
+/*   Updated: 2020/07/28 17:56:21 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_init_raycast(t_ray *ray, t_config *config, int x)
 {
 	//calculate ray position and direction
-	ray->cam_x = 2 * x / (config->width - 1.0);
+	ray->cam_x = 2 * x / (double)config->width - 1.0;
 	ray->rayDir_x = ray->dir_x + ray->plane_x * ray->cam_x;
 	ray->rayDir_y = ray->dir_y + ray->plane_y * ray->cam_x;
 	//Case dans laquelle on se trouve
@@ -24,9 +24,8 @@ void	ft_init_raycast(t_ray *ray, t_config *config, int x)
 	//longueur ray depuis x/y-size au suivant
 	ray->deltaDist_x = fabs(1 / ray->rayDir_x);
 	ray->deltaDist_y = fabs(1 / ray->rayDir_y);
+	ray->hit = 0;
 }
-
-
 
 void	ft_calcul_step(t_ray *ray)
 {
@@ -51,9 +50,6 @@ void	ft_calcul_step(t_ray *ray)
 		ray->sideDist_y = (ray->mapY + 1.0 - ray->pos_y) * ray->deltaDist_y;
 	}
 }
-
-
-
 
 void	ft_dda_algo(t_ray *ray, t_config *config)
 {
@@ -82,10 +78,40 @@ void	ft_get_wall_dist(t_ray *ray, int x)
 {
 	//Calculate distance projected on camera direction
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->mapX - ray->pos_x + (1 - ray->stepX) / 2) / ray->rayDir_x;
+		ray->perpWallDist = (ray->mapX - ray->pos_x + (1.0 - ray->stepX) / 2.0) / ray->rayDir_x;
 	else
-		ray->perpWallDist = (ray->mapY - ray->pos_y + (1 - ray->stepY) - 2) / ray->rayDir_y;
+		ray->perpWallDist = (ray->mapY - ray->pos_y + (1.0 - ray->stepY) / 2.0) / ray->rayDir_y;
 	if (ray->perpWallDist == 0)
 		ray->perpWallDist = 0.01;
 	ray->zbuffer[x] = ray->perpWallDist;
+}
+
+
+void	ft_raycasting(t_game *game)
+{
+	t_draw draw;
+
+	draw.x = 0;
+	
+	while (draw.x < game->config->width)
+	{
+		//Ray position and direction
+		ft_init_raycast(game->ray, game->config, draw.x);
+		//Calcule stepX et stepY
+		ft_calcul_step(game->ray);
+		//perform DDA
+		ft_dda_algo(game->ray, game->config);
+		//Get perpWallDist
+		ft_get_wall_dist(game->ray, draw.x);
+
+		//Coordonnee de la texture
+		ft_get_tex_coords(game->ray, game);
+		//Get line_height et draw start/end
+		ft_init_drawing(game->ray, game->config, &draw, game->tex[game->ray->wallDir].height);
+		
+		//Affichage couleurs
+		ft_draw_colors(game, &draw);
+
+		draw.x++;	
+	}
 }

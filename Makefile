@@ -53,49 +53,48 @@ SRCS 	+= ./srcs/raycasting/ft_launch_prog.c \
 			./srcs/raycasting/raycasting.c \
 			./srcs/raycasting/ft_draw.c \
 			./srcs/raycasting/ft_move.c \
+			./srcs/raycasting/ft_save.c \
+			./srcs/raycasting/ft_sprite.c \
 			./srcs/raycasting/ft_main_loop.c
 
 # Utils
-SRCS 	+= ./srcs/utils/ft_atoi.c \
-			./srcs/utils/ft_init.c \
-			./srcs/utils/ft_split.c \
-			./srcs/utils/ft_strchr.c \
+SRCS 	+= 	./srcs/utils/ft_init.c \
 			./srcs/utils/ft_strcmp.c \
-			./srcs/utils/ft_strlen.c \
 			./srcs/utils/ft_utils.c \
 			./srcs/utils/ft_strncpy.c \
-			./srcs/utils/ft_strdup.c \
-			./srcs/utils/ft_calloc.c \
-			./srcs/utils/ft_bzero.c \
 			./srcs/utils/ft_init_texture_sprite.c \
-			./srcs/utils/ft_storage.c \
-			./srcs/utils/ft_strnstr.c
+			./srcs/utils/ft_storage.c
+
 
 # --------- INC --------- #
 
 INCLUDES	= ./includes/
 HEADER		= $(INCLUDES)cub3d.h
 INC_ALL		= -I$(INCLUDES) -I$(MLX_DIR)
-# A remettre à la suite au dessus : 
+LIBFT		= ./libft/libft.a
+LIBPATH		= ./libft
 
 # --------- OBJS --------- #
 
-DIR_OBJS	= ./srcs/objs/
 OBJS		= $(SRCS:.c=.o)
 #OBJSBONUS	= ${BONUS:.c=.o}
+
+
+
+
 
 # --------- Compil --------- #
 
 all: $(NAME)
 
-$(NAME): $(DIR_OBJS) $(OBJS) mlxcomp
-	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@ $(MLX)
+$(NAME): $(LIB) $(OBJS) mlxcomp 
+	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@ $(MLX) -L$(LIBPATH) -lft
 
-$(DIR_OBJS)/%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) $(ENV) -g -c $< -o ${<:.c=$(DIR_OBJS).o} $(INC_ALL)
+$(LIB):
+	make -C $(LIBPATH)
 
-$(DIR_OBJS):
-	mkdir $(DIR_OBJS)
+.c.o:
+	$(CC) $(CFLAGS) $(ENV) -g -c $< -o ${<:.c=.o} $(INC_ALL)
 
 mlxcomp:
 	$(MAKE) -C $(MLX_DIR)
@@ -104,7 +103,7 @@ mlxcomp:
 
 clean:
 	$(MAKE) clean -C $(MLX_DIR)
-	rm -R $(DIR_OBJS)
+	$(MAKE) clean -C $(LIBPATH)
 
 fclean: clean
 	rm -f $(NAME)
@@ -114,5 +113,7 @@ re: fclean
 
 #cleanbmp:
 #	rm bmp_saved/Cub3D_*
+
+
 
 .PHONY : all clean fclean re mlxcomp cleanbmp

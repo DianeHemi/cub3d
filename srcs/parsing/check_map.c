@@ -104,7 +104,10 @@ int	ft_check_map(t_config *config)
 			if (!ft_strchr(" 012NSEW", config->map[y][x]))
 				return (ft_errors("Invalid character in map.\n"));
 			if (ft_strchr("NSEW", config->map[y][x]))
-				ft_get_player_pos(config, y, x);
+			{
+				if (!ft_get_player_pos(config, y, x))
+					return (0);
+			}
 			x++;
 		}
 		y++;

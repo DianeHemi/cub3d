@@ -14,35 +14,15 @@
 # define CUB3D_H
 
 # include <math.h>
-# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h" //A enlever
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "config.h"  //Header parsing
-# include "utils.h"	//Remplace la libft + utilitaires
-# include "raycasting.h" //Moteur du jeu
+# include "../libft/libft.h"
+# include "config.h"
+# include "utils.h"
+# include "raycasting.h"
 # include "get_next_line.h"
-
-
-
-
-
-/*
-** MACROS
-*/
-
-
-
-/*
- *** Structure generale, contenant autres structs
-*/
-typedef	struct s_struct
-{
-
-
-
-}		t_cub3d;
-
 
 
 
@@ -50,9 +30,6 @@ typedef	struct s_struct
 *** Fonctions
 */
 
-/*
-*** Affichage des erreurs
-*/
 int	ft_errors(char *str);
 
 

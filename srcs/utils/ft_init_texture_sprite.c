@@ -89,8 +89,8 @@ void	ft_get_pos_sprite(t_sprite *sprite, t_config *data, t_game *game)
 		{
 			if (data->map[y][x] == '2')
 			{
-				sprite[i].pos_x = (double)x + 0.5;
-				sprite[i].pos_y = (double)y + 0.5;
+				sprite[i].x = (double)x + 0.5;
+				sprite[i].y = (double)y + 0.5;
 				i++;
 			}
 			x++;

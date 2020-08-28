@@ -26,6 +26,7 @@ void	ft_init_config(t_config *config)
 	config->player_x = 0;
 	config->player_y = 0;
 	config->player_start = '0';
+	config->nb_sprite = 0;
 }
 
 void	ft_set_dir(t_ray *ray, double x, double y)
@@ -36,13 +37,10 @@ void	ft_set_dir(t_ray *ray, double x, double y)
 
 void	ft_init_player_pos(t_config *config, t_ray *ray)
 {
-
 	ray->pos_x = config->player_x + .5;
 	ray->pos_y = config->player_y + .5;
-
 	ray->plane_x = 0.66;
 	ray->plane_y = 0.;
-
 	if (config->player_start == 'N')
 		ft_set_dir(ray, 0., -1.);
 	else if (config->player_start == 'S')

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <stdio.h>///
 
 
 
@@ -29,39 +28,25 @@ void	my_mlx_pixel_put(t_mlx *mlx, int y, int x, int color)
 }
 
 
-
+/*--------------------------------------------*/
+/*--------------------------------------------*/
+/*--------------------------------------------*/
 
 
 int 	ft_main_loop(t_game *game)
 {
-
 	ft_raycasting(game);
 
-	//Sprite management ?
-
-	//free zbuffer
+	//Sprite management
+	ft_sprite_management(game, game->config);
 
 	//Gestion des déplacements
 	ft_move_player(game->move, game->ray, game->config);
 
-
-
 	//Envoyer image vers fenetre
 	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->mlx->img, 0, 0);
-
+	mlx_do_sync(game->mlx->ptr);
 	//save
 
 	return (1);
 }
-
-
-
-
-/*
-printf("----\n");
-printf("mapX : %d, mapY : %d\npos_x : %f, pos_y : %f\nstepX : %d, stepY: %d\n", game->ray->mapX, game->ray->mapY, game->ray->pos_x, game->ray->pos_y, game->ray->stepX, game->ray->stepY);
-printf("RayDir_x : %f, RayDir_y : %f\nsideDist_x : %f, sideDist_y : %f\ndeltaDist_x : %f, deltaDist_y: %f\n", game->ray->rayDir_x, game->ray->rayDir_y, game->ray->sideDist_x, game->ray->sideDist_y, game->ray->deltaDist_x, game->ray->deltaDist_y);
-printf("hit : %d, cameraX : %f\n", game->ray->hit, game->ray->cam_x);
-printf("D-start : %d, D-end : %d\nlineHeight : %d, perpWallDist : %f \n", game->draw->drawStart, game->draw->drawEnd, game->draw->lineHeight, game->ray->perpWallDist);//
-printf("Wall dir: %d\n", game->ray->wallDir);
-printf("----\n\n");*/

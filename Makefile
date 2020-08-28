@@ -35,6 +35,7 @@ SRCS 	+= ./srcs/cub3d.c
 
 # Parsing
 SRCS 	+=	./srcs/parsing/parsing.c \
+			./srcs/parsing/ft_check_config.c \
 			./srcs/parsing/ft_get_walls.c \
 			./srcs/parsing/ft_get_data.c \
 			./srcs/parsing/ft_get_colors.c \
@@ -104,6 +105,7 @@ mlxcomp:
 clean:
 	$(MAKE) clean -C $(MLX_DIR)
 	$(MAKE) clean -C $(LIBPATH)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)

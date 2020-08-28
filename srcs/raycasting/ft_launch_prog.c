@@ -11,14 +11,13 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <stdio.h> //
 
 int 	ft_exit(t_game *game)
 {
-	//Free everything
 	ft_free_tab(game->config->map);
 	mlx_clear_window(game->mlx->ptr, game->mlx->win);
 	mlx_destroy_window(game->mlx->ptr, game->mlx->win);
+	free(game->sprite);
 	exit(EXIT_SUCCESS);
 	return (1);
 }
@@ -39,14 +38,13 @@ int ft_launch_prog(t_config *data, t_mlx *mlx, int save_opt)
 {
 	t_game		game;
 	t_ray 		ray;
-	t_texture	tex[4];
+	t_texture	tex[5];
 	t_sprite	*sprite;
 	t_move		move;
 
 	if (!(sprite = malloc(sizeof(*sprite) * data->nb_sprite)))
 		return (ft_errors("Memory allocation failed.\n"));
 	ft_get_pos_sprite(sprite, data, &game);
-
 
 
 	if ((mlx->ptr = mlx_init()) == NULL)
@@ -70,8 +68,9 @@ int ft_launch_prog(t_config *data, t_mlx *mlx, int save_opt)
 
 
 	//Fonction qui sauvegarde en bmp !
-	//ft_save(&game, save_opt);
-(void)save_opt;
+	if (save_opt == 1)
+		ft_save(&game);
+
 
 
 	//Fonction qui gère l'appui sur une touche
@@ -82,7 +81,7 @@ int ft_launch_prog(t_config *data, t_mlx *mlx, int save_opt)
 	mlx_hook(mlx->win, 33, 0, ft_exit, &game);
 	mlx_loop_hook(mlx->ptr, ft_main_loop, &game);
 	mlx_loop(mlx->ptr);
-	
+	free(game.ray->zbuffer);
 
 
 	return (1);

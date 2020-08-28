@@ -44,18 +44,19 @@ int ft_get_player_pos(t_config *config, int y, int x)
 
 int	ft_get_sprite(t_config *config, char *line)
 {
-	int i;
-	int j;
+	int start;
+	int end;
 
-	i = 0;
+	start = 0;
 	if (config->sprite_tex[0] != '\0')
 		return (ft_errors("Duplicate sprite declared.\n"));
-	while (line[i] == ' ' && line[i] != '\0')
-		i++;
-	j = i;
-	while (line[j] != ' ' && line[j] != '\0')
-		j++;
-	ft_strncpy(&line[i], config->sprite_tex, j - i - 1);
+	while (line[start] == ' ' && line[start] != '\0')
+		start++;
+	end = start;
+	while (line[end] != ' ' && line[end] != '\0')
+		end++;
+	if (line[end] != '\0')
+		end++;
+	ft_strncpy(&line[start], config->sprite_tex, end - start - 1);
 	return (1);
 }
-

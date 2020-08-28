@@ -1,16 +1,16 @@
 R 640 500
-NO ./textures/BluegreyD.XPM
-WE ./textures/BluegreyswasD.XPM
-SO ./textures/BluegreyeagleD.XPM
-EA ./textures/BookshelfD.XPM
+NO textures/BluegreyD.xpm
+WE textures/BluegreyswasD.xpm
+SO textures/BluegreyeagleD.xpm
+EA textures/002-rooftiles8.xpm
 
-S ./texture/pillar.XPM
+S textures/pillar.XPM
 F 50,50,140
 C 0,0,50
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 1 0 0 0 0 0 0 2 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
-1 0 1 1 0 0 0 0 0 1 1 1 0 E 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1
+1 0 1 1 0 0 0 0 0 1 1 1 0 S 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1
 1 0 0 1 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1
 1 0 1 1 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1
 1 0 0 0 0 0 0 0 0 0 1 1 0 0 2 0 0 1 1 1 0 1 1 1 1 0 0 0 1

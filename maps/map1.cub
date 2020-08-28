@@ -1,21 +1,21 @@
 R 640 500
-NO ./textures/WoodbrickD.XPM
-SO ./textures/wood.XPM
-WE ./textures/WoodbrickeagleD.XPM
-EA ./textures/WoodbrickswasD.XPM
+NO textures/WoodbrickD.xpm
+SO textures/wood.xpm
+WE textures/WoodbrickeagleD.xpm
+EA textures/WoodbrickswasD.xpm
 
-S ./textures/W3d_finalarmor.XPM
+S textures/barrel.xpm
 F 50,50,140
-C 0,0,50
+C 100,0,50
 
 
 
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-1 0 0 0 0 0 0 2 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
-1 0 1 1 0 0 0 0 0 1 1 1 0 E 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1
-1 0 0 1 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1
-1 0 1 1 0 0 0 0 0 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1
-1 0 0 0 0 0 0 0 0 0 1 1 0 0 2 0 0 1 1 1 0 1 1 1 1 0 0 0 1
+1 0 0 0 0 0 0 2 0 0 1 1 0 0 0 S 0 0 0 0 0 0 0 0 0 0 0 0 1
+1 0 1 1 0 0 0 0 0 1 1 1 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1
+1 2 0 1 0 0 2 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 1 0 0 0 1
+1 0 1 1 0 0 0 0 0 1 1 1 0 0 0 0 2 0 0 0 0 0 0 0 1 0 0 0 1
+1 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 1 1 0 1 1 1 1 0 0 0 1
 1 1 1 1 0 1 1 1 1 1 1 1 1 1 0 1 1 1 0 0 0 0 0 0 1 0 0 0 1
 1 1 1 1 0 1 1 1 1 1 1 1 1 1 2 1 1 1 0 1 0 1 0 0 1 0 0 0 1
 1 1 0 0 0 0 0 0 1 1 0 1 0 1 0 1 1 1 0 0 0 0 0 0 1 0 0 0 1

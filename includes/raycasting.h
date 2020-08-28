@@ -164,11 +164,38 @@ typedef struct s_texture
 */
 typedef struct s_sprite
 {
-	double		pos_x;
-	double		pos_y;
-
-
+	double		x;
+	double		y;
 }			t_sprite;
+
+typedef struct s_sprite_data
+{
+	double 		x;
+	double 		y;
+	int 		d;
+
+	double 		invDet;
+	double 		dist;
+
+	double 		transformX;
+	double 		transformY;
+	int 		screen_x;
+
+	int 		factor_128;
+
+
+	int 		s_height;
+	int 		drawStart_y;
+	int 		drawEnd_y;
+
+	int 		s_width;
+	int 		drawStart_x;
+	int 		drawEnd_x;
+
+	int 		tex_x;
+	int 		tex_y;
+	int 		color;
+}			t_sprite_data;
 
 
 
@@ -207,6 +234,28 @@ typedef struct s_game
 
 
 
+
+
+/*
+*** Stru1cture de la mlx
+*/
+typedef struct s_save
+{
+	int 		file_size;
+	int 		reserved;
+	int			offset;
+	int 		header_size;
+	short int 	planes;
+	short int 	bpixels;
+	int 		fd;
+
+}			t_save;
+
+
+
+
+
+
 /*
 *** Fonctions
 */
@@ -237,6 +286,13 @@ int		ft_keypress(int keycode, t_game *game);
 int		ft_keyrelease(int keycode, t_game *game);
 int 	ft_exit(t_game *game);
 void	ft_move_player(t_move *move, t_ray *ray, t_config *config);
+
+void	ft_save(t_game *game);
+
+/*
+*** Sprites
+*/
+void	ft_sprite_management(t_game *game, t_config *config);
 
 
 #endif

@@ -26,11 +26,6 @@ int		ft_line_len(char *line)
 			len++;
 			i++;
 		}
-		else if (ft_strchr("10NSEW", line[i]) && line[i + 1] == ' ')
-		{
-			len++;
-			i++;
-		}
 		else
 			len++;
 		i++;
@@ -52,15 +47,13 @@ char	*ft_get_line(char *line)
 		return (NULL);
 	while (line[++i])
 	{
-		if ((line[i] == ' ' && line[i + 1] == ' ')
-			|| (ft_strchr("012NSEW", line[i]) && line[i + 1] == ' '))
+		if (line[i] == ' ' && line[i + 1] == ' ')
 		{
-			str[j] = line[i];
+			str[j++] = line[i];
 			i++;
 		}
-		else
-			str[j] = line[i];
-		j++;
+		else if (ft_strchr("012NSEW", line[i]) || line[i] == '\n')
+			str[j++] = line[i];
 	}
 	free(line);
 	return (str);
@@ -72,22 +65,18 @@ int	ft_get_map(int fd, char *line, t_config *config)
 	char	*map_tmp;
 	char	*tmp;
 
-	if (!(map_tmp = malloc(sizeof(char))))
-		return (ft_errors("Memory allocation failed.\n"));
-	map_tmp[0] = 0;
-	tmp = map_tmp;
 	map_tmp = ft_get_line(line);
-	free(tmp);
 	while ((read = get_next_line(fd, &line)) > 0)
 	{
-		tmp = map_tmp;
 		line = ft_get_line(line);
+		tmp = map_tmp;
 		map_tmp = ft_strjoin(map_tmp, line);
 		free(tmp);
-		free(line);		
+		free(line);	
 	}
 	free(line);
 	config->map = ft_split(map_tmp, '\n');
 	free(map_tmp);
+	config->nb_sprite = ft_get_nb_sprite(config);
 	return (1);
 }

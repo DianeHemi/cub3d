@@ -23,6 +23,21 @@ int ft_rgb_conv(int nb[3], int i)
 	return (nb[i]);
 }
 
+int ft_check_nb(char *str)
+{
+	int i;
+
+	i = 0;
+	if (str[i] == '\n')
+		return (0);
+	while (str[i])
+	{
+		if (!ft_strchr("0123456789\n", str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int ft_rgb_to_int(char *line)
 {
@@ -36,19 +51,19 @@ int ft_rgb_to_int(char *line)
 	color = ft_split(&line[i], ',');
 	while (color[i])
 		i++;
-	if (i > 3)
-		return (ft_errors("Wrong color format, it must be 'R,G,B'.\n"));
+	if (i > 3 || i < 3)
+		return (-1);
 	i = 0;
 	while (i < 3)
 	{
-		if (color[i] == NULL)
-			return (ft_errors("Wrong color format, it must be 'R,G,B'.\n"));
+		if (color[i] == NULL || !ft_check_nb(color[i]))
+			return (-1);
 		else
 			nb[i] = ft_atoi(color[i]);
 		i++;
 	}
 	ft_free_tab(color);
-	nb[i] = ft_rgb_conv(nb, i);   //Ajouter check nb = -1 et renvoyer erreur si oui ?
+	nb[i] = ft_rgb_conv(nb, i);
 	return (nb[i]);
 }
 
@@ -60,5 +75,7 @@ int	ft_get_colors(t_config *config, char *line)
 		config->c_color = ft_rgb_to_int(&line[1]);
 	else
 		return (ft_errors("Duplicate colors data.\n"));
+	if (config->f_color == -1 || config->c_color == -1)
+		return (ft_errors("Wrong color format, it must be 'R,G,B'.\n"));
 	return (1);
 }

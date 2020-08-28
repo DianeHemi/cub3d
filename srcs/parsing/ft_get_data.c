@@ -12,20 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-int ft_get_player_pos(t_config *config, int y, int x)
-{
-	if (config->player_start == '0')
-	{
-		config->player_x = x;
-		config->player_y = y;
-		config->player_start = config->map[y][x];
-		config->map[y][x] = '0';
-	}
-	else
-		return (ft_errors("Only one camera allowed.\n"));
-	return (1);
-}
-
 int	ft_get_resolution(t_config *config, char *line)
 {
 	int i;
@@ -39,6 +25,20 @@ int	ft_get_resolution(t_config *config, char *line)
 	while (line[i] != ' ')
 		i++;
 	config->height = ft_atoi(&line[i]);
+	return (1);
+}
+
+int ft_get_player_pos(t_config *config, int y, int x)
+{
+	if (config->player_start == '0')
+	{
+		config->player_x = x;
+		config->player_y = y;
+		config->player_start = config->map[y][x];
+		config->map[y][x] = '0';
+	}
+	else
+		return (ft_errors("Only one camera allowed.\n"));
 	return (1);
 }
 
@@ -59,19 +59,3 @@ int	ft_get_sprite(t_config *config, char *line)
 	return (1);
 }
 
-int	ft_open_tex(t_config *config)
-{
-	int fd;
-
-	if ((fd = open(config->north_tex, O_RDONLY)) < 0)
-		return (0);
-	if ((fd = open(config->south_tex, O_RDONLY)) < 0)
-		return (0);
-	if ((fd = open(config->east_tex, O_RDONLY)) < 0)
-		return (0);
-	if ((fd = open(config->west_tex, O_RDONLY)) < 0)
-		return (0);
-	if ((fd = open(config->sprite_tex, O_RDONLY)) < 0)
-		return (0);
-	return (1);
-}

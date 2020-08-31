@@ -83,7 +83,7 @@ int ft_launch_prog(t_config *data, t_mlx *mlx, int save_opt)
 	//Fonction qui gère le relachement d'une touche
 	mlx_hook(mlx->win, 3, 1L<<1, ft_keyrelease, &game);
 	//Fonction pour quitter proprement
-	mlx_hook(mlx->win, 33, 1L<<17, ft_exit, &game); //33 should be 17
+	mlx_hook(mlx->win, EXIT_BTN, 1L<<17, ft_exit, &game);
 	mlx_loop_hook(mlx->ptr, ft_main_loop, &game);
 	mlx_loop(mlx->ptr);
 

@@ -23,6 +23,7 @@
 # ifdef __linux__
 
 #  define ESC 		65307
+#  define EXIT_BTN	33
 
 #  ifndef QWERTY
 #  define FORWD 	122
@@ -53,6 +54,7 @@
 #  define TURN_L 	123
 #  define TURN_R 	124
 #  define ESC 		53
+#  define EXIT_BTN	17
 #  endif
 
 

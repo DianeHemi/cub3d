@@ -19,14 +19,9 @@ int		ft_line_len(char *line)
 
 	len = 0;
 	i = 0;
-	while (line[i])
+	while (line[i] != '\0')
 	{
-		if (line[i] == ' ' && line[i + 1] == ' ')
-		{
-			len++;
-			i++;
-		}
-		else
+		if (ft_strchr("012NSEW \n", line[i]))
 			len++;
 		i++;
 	}	
@@ -40,20 +35,16 @@ char	*ft_get_line(char *line)
 	int len;
 	char *str;
 
-	i = -1;
+	i = 0;
 	j = 0;
 	len = ft_line_len(line);
 	if (!(str = calloc(len, sizeof(char *))))
 		return (NULL);
-	while (line[++i])
+	while (line[i] != '\0')
 	{
-		if (line[i] == ' ' && line[i + 1] == ' ')
-		{
+		if (ft_strchr("012NSEW \n", line[i]))
 			str[j++] = line[i];
-			i++;
-		}
-		else if (ft_strchr("012NSEW", line[i]) || line[i] == '\n')
-			str[j++] = line[i];
+		i++;
 	}
 	free(line);
 	return (str);

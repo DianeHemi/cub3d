@@ -14,25 +14,22 @@
 # define UTILS_H
 
 # include "raycasting.h"
+
+
+
 /*
-*** Compare 2 strings
+*** Fonctions relatives a exit
+*/
+void	ft_free_tab(char **str);
+int 	ft_exit(t_game *game);
+
+
+/*
+*** Utilitaires
 */
 int		ft_strcmp(const char *s1, const char *s2);
-
-/*
-*** Cherche mot dans phrase
-*/
-char	*ft_strnstr(const char *s1, const char *s2, size_t len);
-
-char	*ft_strchr(const char *s, int c);
-
-size_t	ft_strlen(const char *s);
-int		ft_atoi(const char *nptr);
-char	**ft_split(char const *s, char c);
 char	*ft_strncpy(char *src, char *dest, int len);
-char	*ft_strdup(const char *s);
-void	*ft_calloc(size_t nmemb, size_t size);
-void	ft_bzero(void *s, size_t n);
+
 
 /*
 *** Initialisation des structures
@@ -50,13 +47,10 @@ int 	ft_get_nb_sprite(t_config *data);
 
 int		ft_init_store(t_config *data, t_ray *ray, 
 						t_mlx *mlx, t_game *game);
+
+
 void	ft_init_tex_struct(t_game *game);
 void	ft_init_move(t_move *move, t_game *game);
-
-/*
-*** Liberation memoire sur tableaux
-*/
-void	ft_free_tab(char **str);
 
 
 #endif

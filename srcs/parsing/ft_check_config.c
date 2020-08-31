@@ -33,15 +33,11 @@ int	ft_check_config(t_config *config)
 {
 	if (config->width <= 0 || config->height <= 0)
 		return (ft_errors("Resolution incorrect.\n"));
-	if (config->width > 1920)
-		config->width = 1920;
-	if (config->height > 1080)
-		config->height = 1080;
 	if (config->f_color < 0 || config->c_color < 0)
 		return (ft_errors("Floor or ceiling color is incorrect.\n"));
-	if (config->north_tex[0] == '\0' || config->south_tex[0] == '\0'
-		|| config->east_tex[0] == '\0' || config->west_tex[0] == '\0'
-		|| config->sprite_tex[0] == '\0')
+	if (config->north_tex == NULL || config->south_tex == NULL
+		|| config->east_tex == NULL || config->west_tex == NULL
+		|| config->sprite_tex == NULL)
 		return (ft_errors("Textures are missing.\n"));
 	if (!ft_open_tex(config))
 		return (ft_errors("Cannot open textures.\n"));

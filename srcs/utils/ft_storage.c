@@ -12,20 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-void	ft_init_move(t_move *move, t_game *game)
-{
-	move->forwd = 0;
-	move->backwd = 0;
-	move->left = 0;
-	move->right = 0;
-	move->turn_l = 0;
-	move->turn_r = 0;
-	move->mv_spd = 0.07;
-	move->rota_spd = 0.06;
-	game->move = move;
-}
-
-
 int		ft_init_store(t_config *data, t_ray *ray, t_mlx *mlx, t_game *game)
 {
 	game->mlx = mlx;

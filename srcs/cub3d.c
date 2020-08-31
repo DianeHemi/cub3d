@@ -69,7 +69,6 @@ int	main(int argc, char **argv)
 	t_config	config;
 	t_mlx		mlx;
 
-
 	save_opt = 0;
 	if (!ft_check_args(argc, argv, &save_opt))
 		return (EXIT_FAILURE);
@@ -82,13 +81,10 @@ int	main(int argc, char **argv)
 		ft_errors("Error : Configuration is invalid.\n");
 		return (EXIT_FAILURE);
 	}
-
-
+	if (!ft_launch_mlx(&mlx, &config))
+		return (EXIT_FAILURE);
 	if (!ft_launch_prog(&config, &mlx, save_opt))
 		return (EXIT_FAILURE);
-
-
-
 
 	return (0);
 }

@@ -45,16 +45,16 @@ int ft_check_sides(t_config *config)
 	int last;
 
 	y = 0;
-	first = 0;
 	while (config->map[y])
 	{
-		while (config->map[y][first] == ' ')
+		first = 0;
+		while (!ft_strchr("012NSEW", config->map[y][first]))
 			first++;
 		last = ft_strlen(config->map[y]) - 1;
-		while (last > 0 && config->map[y][last] == ' ')
+		while (last > 0 && !ft_strchr("012NSEW", config->map[y][last]))
 			last--;
 		if (config->map[y][first] != '1' || config->map[y][last] != '1')
-			return (1);
+			return (0);
 		y++;
 	}
 	return (1);
@@ -74,11 +74,8 @@ int ft_check_middle(t_config *config)
 			if ((config->map[y][x] == '0' && config->map[y + 1][x] == ' ')
 				|| (config->map[y][x] == '0' && config->map[y - 1][x] == ' '))
 				return (0);
-			else if (config->map[y][x] == '0' && config->map[y][x + 1] == ' ' 
-				&& config->map[y][x + 2] == ' ')
-				return (0);
-			else if (config->map[y][x] == '0' && config->map[y][x - 1] == ' ' 
-				&& config->map[y][x - 2] == ' ')
+			else if ((config->map[y][x] == '0' && config->map[y][x + 1] == ' ')
+				|| (config->map[y][x] == '0' && config->map[y][x - 1] == ' '))
 				return (0);
 			x++;
 		}

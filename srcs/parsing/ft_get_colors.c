@@ -69,9 +69,9 @@ int ft_rgb_to_int(char *line)
 
 int	ft_get_colors(t_config *config, char *line)
 {
-	if (line[0] == 'F' && config->f_color == 0)
+	if (line[0] == 'F' && config->f_color == -2)
 		config->f_color = ft_rgb_to_int(&line[1]);
-	else if (line[0] == 'C' && config->c_color == 0)
+	else if (line[0] == 'C' && config->c_color == -2)
 		config->c_color = ft_rgb_to_int(&line[1]);
 	else
 		return (ft_errors("Duplicate colors data.\n"));

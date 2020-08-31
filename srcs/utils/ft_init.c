@@ -16,17 +16,30 @@ void	ft_init_config(t_config *config)
 {
 	config->width = 0;
 	config->height = 0;
-	config->north_tex[0] = '\0';
-	config->south_tex[0] = '\0';
-	config->west_tex[0] = '\0';
-	config->east_tex[0] = '\0';
-	config->sprite_tex[0] = '\0';
-	config->f_color = 0;
-	config->c_color = 0;
+	config->north_tex = NULL;
+	config->south_tex = NULL;
+	config->west_tex = NULL;
+	config->east_tex = NULL;
+	config->sprite_tex = NULL;
+	config->f_color = -2;
+	config->c_color = -2;
 	config->player_x = 0;
 	config->player_y = 0;
 	config->player_start = '0';
 	config->nb_sprite = 0;
+}
+
+void	ft_init_move(t_move *move, t_game *game)
+{
+	move->forwd = 0;
+	move->backwd = 0;
+	move->left = 0;
+	move->right = 0;
+	move->turn_l = 0;
+	move->turn_r = 0;
+	move->mv_spd = 0.04;
+	move->rota_spd = 0.05;
+	game->move = move;
 }
 
 void	ft_set_dir(t_ray *ray, double x, double y)

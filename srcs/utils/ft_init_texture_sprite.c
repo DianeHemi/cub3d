@@ -49,6 +49,11 @@ int 		ft_init_textures(t_config *data, t_game *game,
 	if (!ft_init_textures_data(tex))
 		return (0);
 	game->tex = tex;
+	free(data->north_tex);
+	free(data->south_tex);
+	free(data->east_tex);
+	free(data->west_tex);
+	free(data->sprite_tex);
 	return (1);
 }
 

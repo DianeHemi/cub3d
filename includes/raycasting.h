@@ -259,6 +259,7 @@ typedef struct s_save
 /*
 *** Fonctions
 */
+int 	ft_launch_mlx(t_mlx *mlx, t_config *data);
 int 	ft_launch_prog(t_config *config, t_mlx *mlx, int save_opt);
 int 	ft_main_loop(t_game *game);
 
@@ -284,9 +285,9 @@ void	my_mlx_pixel_put(t_mlx *mlx, int y, int x, int color);
 */
 int		ft_keypress(int keycode, t_game *game);
 int		ft_keyrelease(int keycode, t_game *game);
-int 	ft_exit(t_game *game);
 void	ft_move_player(t_move *move, t_ray *ray, t_config *config);
 
+int 	ft_exit(t_game *game);
 void	ft_save(t_game *game);
 
 /*

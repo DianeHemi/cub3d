@@ -18,7 +18,7 @@ int ft_get_wall_north(t_config *config, char *line)
 	int end;
 
 	start = 0;
-	if (config->north_tex[0] != '\0')
+	if (config->north_tex != NULL)
 		return (ft_errors("Duplicate north wall texture declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
@@ -27,7 +27,8 @@ int ft_get_wall_north(t_config *config, char *line)
 		end++;
 	if (line[end] != '\0')
 		end++;
-	ft_strncpy(&line[start], config->north_tex, end - start - 1);
+	config->north_tex = ft_substr(line, start, end - start - 1);
+	//ft_strncpy(&line[start], config->north_tex, end - start - 1);
 	return (1);
 }
 
@@ -37,7 +38,7 @@ int ft_get_wall_south(t_config *config, char *line)
 	int end;
 
 	start = 0;
-	if (config->south_tex[0] != '\0')
+	if (config->south_tex != NULL)
 		return (ft_errors("Duplicate south wall texture declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
@@ -46,7 +47,8 @@ int ft_get_wall_south(t_config *config, char *line)
 		end++;
 	if (line[end] != '\0')
 		end++;
-	ft_strncpy(&line[start], config->south_tex, end - start - 1);
+	//ft_strncpy(&line[start], config->south_tex, end - start - 1);
+	config->south_tex = ft_substr(line, start, end - start - 1);
 	return (1);
 }
 
@@ -56,7 +58,7 @@ int ft_get_wall_east(t_config *config, char *line)
 	int end;
 
 	start = 0;
-	if (config->east_tex[0] != '\0')
+	if (config->east_tex != NULL)
 		return (ft_errors("Duplicate east wall texture declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
@@ -65,7 +67,8 @@ int ft_get_wall_east(t_config *config, char *line)
 		end++;
 	if (line[end] != '\0')
 		end++;
-	ft_strncpy(&line[start], config->east_tex, end - start - 1);
+	config->east_tex = ft_substr(line, start, end - start - 1);
+	//ft_strncpy(&line[start], config->east_tex, end - start - 1);
 	return (1);
 }
 
@@ -75,7 +78,7 @@ int ft_get_wall_west(t_config *config, char *line)
 	int end;
 
 	start = 0;
-	if (config->west_tex[0] != '\0')
+	if (config->west_tex != NULL)
 		return (ft_errors("Duplicate west wall texture declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
@@ -84,6 +87,7 @@ int ft_get_wall_west(t_config *config, char *line)
 		end++;
 	if (line[end] != '\0')
 		end++;
-	ft_strncpy(&line[start], config->west_tex, end - start - 1);
+	config->west_tex = ft_substr(line, start, end - start - 1);
+	//ft_strncpy(&line[start], config->west_tex, end - start - 1);
 	return (1);
 }

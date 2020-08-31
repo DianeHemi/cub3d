@@ -25,11 +25,11 @@ typedef	struct s_config
 
 	char		**map;
 
-	char		north_tex[256];
-	char		south_tex[256];
-	char		west_tex[256];
-	char		east_tex[256];
-	char		sprite_tex[256];
+	char		*north_tex;
+	char		*south_tex;
+	char		*west_tex;
+	char		*east_tex;
+	char		*sprite_tex;
 
 	int			f_color;
 	int			c_color;

@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <stdio.h>//
+
 int 	ft_exit(t_game *game)
 {
-printf("%s\n", "Enter exit function");
 	ft_free_tab(game->config->map);
 
 	mlx_destroy_image(game->mlx->ptr, game->mlx->img);

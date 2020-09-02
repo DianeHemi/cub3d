@@ -92,7 +92,6 @@ void	ft_raycasting(t_game *game)
 	t_draw draw;
 
 	draw.x = 0;
-	
 	while (draw.x < game->config->width)
 	{
 		//Ray position and direction

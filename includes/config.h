@@ -22,6 +22,7 @@ typedef	struct s_config
 {
 	int			width;
 	int			height;
+	double 		ratio;
 
 	char		**map;
 

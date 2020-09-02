@@ -13,12 +13,6 @@
 #include "../../includes/cub3d.h"
 
 
-
-/*--------------------------------------------*/
-/*--------------------------------------------*/
-/*--------------------------------------------*/
-/* --- Pixel put --- */
-
 void	my_mlx_pixel_put(t_mlx *mlx, int y, int x, int color)
 {
 	char	*dst;
@@ -28,25 +22,3 @@ void	my_mlx_pixel_put(t_mlx *mlx, int y, int x, int color)
 }
 
 
-/*--------------------------------------------*/
-/*--------------------------------------------*/
-/*--------------------------------------------*/
-
-
-int 	ft_main_loop(t_game *game)
-{
-	ft_raycasting(game);
-
-	//Sprite management
-	ft_sprite_management(game, game->config);
-
-	//Gestion des déplacements
-	ft_move_player(game->move, game->ray, game->config);
-
-	//Envoyer image vers fenetre
-	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->mlx->img, 0, 0);
-	mlx_do_sync(game->mlx->ptr);
-	//save
-
-	return (1);
-}

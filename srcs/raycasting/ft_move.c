@@ -12,7 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-
 int		ft_keypress(int keycode, t_game *game)
 {
 	if (keycode == FORWD)
@@ -29,7 +28,6 @@ int		ft_keypress(int keycode, t_game *game)
 		game->move->turn_r = 1;
 	return (0);
 }
-
 
 int		ft_keyrelease(int keycode, t_game *game)
 {
@@ -49,8 +47,6 @@ int		ft_keyrelease(int keycode, t_game *game)
 		game->move->turn_r = 0;
 	return (0);
 }
-
-
 
 void	ft_move_rotate(t_move *move, t_ray *ray)
 {
@@ -79,87 +75,42 @@ void	ft_move_rotate(t_move *move, t_ray *ray)
 	}
 }
 
-
-
-void ft_map_edges_x(t_config *config, t_ray *ray, int *start_x, int *end_x)
-{
-	*start_x = 0;
-	while (config->map[(int)ray->pos_y][*start_x] != '1')
-		*start_x += 1;
-	*end_x = *start_x;
-	while (config->map[(int)ray->pos_y][*end_x])
-		*end_x += 1;
-}
-
-
-void ft_map_edges_y(t_config *config, t_ray *ray, int *start_y, int *end_y)
-{
-	*start_y = 0;
-	while (config->map[*start_y][(int)ray->pos_x] != '1')
-		*start_y += 1;
-	*end_y = *start_y;
-	while (config->map[*end_y])
-		*end_y += 1;
-}
-
-
-
-
 void	ft_move_sideway(t_move *move, t_ray *ray, t_config *config)
 {
-	int start_x;
-	int end_x;
-	int start_y;
-	int end_y;
 	//Deplacement a droite
 	if (move->right == 1)
 	{
-		ft_map_edges_x(config, ray, &start_x, &end_x);
-		ft_map_edges_y(config, ray, &start_y, &end_y);
-		if ((int)(ray->pos_x + ray->plane_x * move->mv_spd) < (end_x - 1) && (int)(ray->pos_x + ray->plane_x * move->mv_spd) > start_x)
+		if (config->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->plane_x * move->mv_spd)] != '1')
 			ray->pos_x += ray->plane_x * move->mv_spd;
-		if ((int)(ray->pos_y + ray->plane_y * move->mv_spd) < (end_y - 1) && (int)(ray->pos_y + ray->plane_y * move->mv_spd) > start_y)
+		if (config->map[(int)(ray->pos_y + ray->plane_y * move->mv_spd)][(int)(ray->pos_x)] != '1')
 			ray->pos_y += ray->plane_y * move->mv_spd;
 	}
 	//Deplacement a gauche
 	if (move->left == 1)
 	{
-		ft_map_edges_x(config, ray, &start_x, &end_x);
-		ft_map_edges_y(config, ray, &start_y, &end_y);
-		if ((int)(ray->pos_x - ray->plane_x * move->mv_spd) < (end_x - 1) && (int)(ray->pos_x - ray->plane_x * move->mv_spd) > start_x)
+		if (config->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->plane_x * move->mv_spd)] != '1')
 			ray->pos_x -= ray->plane_x * move->mv_spd;
-		if ((int)(ray->pos_y - ray->plane_y * move->mv_spd) < (end_y - 1) && (int)(ray->pos_y - ray->plane_y * move->mv_spd) > start_y)
+		if (config->map[(int)(ray->pos_y - ray->plane_y * move->mv_spd)][(int)(ray->pos_x)] != '1')
 			ray->pos_y -= ray->plane_y * move->mv_spd;
 	}
 }
 
-
-
-
 void	ft_move_player(t_move *move, t_ray *ray, t_config *config)
 {
-	int start_x;
-	int end_x;
-	int start_y;
-	int end_y;
 	//Avancer
 	if (move->forwd == 1)
 	{
-		ft_map_edges_x(config, ray, &start_x, &end_x);
-		ft_map_edges_y(config, ray, &start_y, &end_y);
-		if ((int)(ray->pos_x + ray->dir_x * move->mv_spd) < (end_x - 1) && (int)(ray->pos_x + ray->dir_x * move->mv_spd) > start_x)
+		if (config->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->dir_x * move->mv_spd)] != '1')
 			ray->pos_x += ray->dir_x * move->mv_spd;
-		if ((int)(ray->pos_y + ray->dir_y * move->mv_spd) < (end_y - 1) && (int)(ray->pos_y + ray->dir_y * move->mv_spd) > start_y)
+		if (config->map[(int)(ray->pos_y + ray->dir_y * move->mv_spd)][(int)(ray->pos_x)] != '1')
 			ray->pos_y += ray->dir_y * move->mv_spd;
 	}
 	//Reculer
 	if (move->backwd == 1)
 	{
-		ft_map_edges_x(config, ray, &start_x, &end_x);
-		ft_map_edges_y(config, ray, &start_y, &end_y);
-		if ((int)(ray->pos_x - ray->dir_x * move->mv_spd) < (end_x - 1) && (int)(ray->pos_x - ray->dir_x * move->mv_spd) > start_x)
+		if (config->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->dir_x * move->mv_spd)] != '1')
 			ray->pos_x -= ray->dir_x * move->mv_spd;
-		if ((int)(ray->pos_y - ray->dir_y * move->mv_spd) < (end_y - 1) && (int)(ray->pos_y - ray->dir_y * move->mv_spd) > start_y)
+		if (config->map[(int)(ray->pos_y - ray->dir_y * move->mv_spd)][(int)(ray->pos_x)] != '1')
 			ray->pos_y -= ray->dir_y * move->mv_spd;
 	}
 	ft_move_sideway(move, ray, config);

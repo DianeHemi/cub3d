@@ -22,39 +22,34 @@ static void	ft_get_color(t_draw *draw, t_texture *tex)
 
 void		ft_draw_colors(t_game *game, t_draw *draw)
 {
-	while (draw->y < game->config->height)
+	draw->y = 0;
+	while (draw->y < draw->drawStart)
 	{
-		if (draw->drawStart <= draw->y && draw->y <= draw->drawEnd)
-			ft_get_color(draw, &(game->tex[draw->side]));
-		if (draw->y > draw->drawEnd)
-			draw->color = game->config->f_color;
+		draw->color = game->config->c_color;
 		my_mlx_pixel_put(game->mlx, draw->y, draw->x, draw->color);
 		draw->y++;
 	}
-}
-
-static int	ft_wall_direction(t_ray *ray)
-{
-	if (ray->side == 1)
+	while (draw->y < draw->drawEnd)
 	{
-		if (ray->rayDir_y < 0)
-			return (1);
-		else
-			return (0);
+		ft_get_color(draw, &(game->tex[draw->side]));
+		my_mlx_pixel_put(game->mlx, draw->y, draw->x, draw->color);
+		draw->y++;
 	}
-	else
+	while (draw->y < game->config->height)
 	{
-		if (ray->rayDir_x < 0)
-			return (2);
-		else
-			return (3);
+		draw->color = game->config->f_color;
+		my_mlx_pixel_put(game->mlx, draw->y, draw->x, draw->color);
+		draw->y++;
 	}
 }
 
 void		ft_get_tex_coords(t_ray *ray, t_game *game)
 {
 	//Get wall that was hit
-	ray->wallDir = ft_wall_direction(ray);
+	if (ray->side == 1)
+		ray->wallDir = ray->rayDir_y < 0 ? 1 : 0;
+	else
+		ray->wallDir = ray->rayDir_x < 0 ? 2 : 3;
 	//Calculate where the wall was hit
 	if (ray->side == 0)
 		ray->wallX = ray->pos_y + ray->perpWallDist * ray->rayDir_y;
@@ -74,13 +69,11 @@ void		ft_get_tex_coords(t_ray *ray, t_game *game)
 void		ft_init_drawing(t_ray *ray, t_config *config, t_draw *draw, int t_height)
 {
 	//Calculate height of line to draw on screen
-	draw->lineHeight = (int)(config->height / ray->perpWallDist);
+	draw->lineHeight = (int)(config->height / ray->perpWallDist) * config->ratio;
 	//calculate lowest and highest pixel to fill in current stripe
 	draw->drawStart = -(draw->lineHeight) / 2 + config->height / 2;
 	draw->drawEnd = (draw->lineHeight) / 2 + config->height / 2;
 
-	draw->color = config->c_color;
-	draw->y = 0;
 	draw->dist = ray->perpWallDist;
 	draw->side = ray->wallDir;
 

@@ -63,6 +63,7 @@ SRCS 	+= 	./srcs/utils/ft_init.c \
 			./srcs/utils/ft_strcmp.c \
 			./srcs/utils/ft_utils.c \
 			./srcs/utils/ft_strncpy.c \
+			./srcs/utils/ft_exit.c \
 			./srcs/utils/ft_init_texture_sprite.c \
 			./srcs/utils/ft_storage.c
 

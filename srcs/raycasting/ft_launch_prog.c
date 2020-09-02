@@ -34,8 +34,8 @@ int ft_adjust_resolution(t_mlx *mlx, t_config *data)
 		return (0);
 	else
 	{
-		data->width > width ? data->width = width : data->width;
-		data->height > height ? data->height = height : data->height;
+		data->width = data->width > width ? width : data->width;
+		data->height = data->height > height ? height : data->height;
 		return (1);
 	}
 }
@@ -50,6 +50,23 @@ int ft_launch_mlx(t_mlx *mlx, t_config *data)
 		return (ft_errors("Window couldn't be initialised.\n"));
 	if (!(ft_init_image(data, mlx)))
 		return (ft_errors("Image initialisation failed.\n"));
+	return (1);
+}
+
+int 	ft_main_loop(t_game *game)
+{
+	ft_raycasting(game);
+
+	//Sprite management
+	ft_sprite_management(game, game->config);
+
+	//Gestion des déplacements
+	ft_move_player(game->move, game->ray, game->config);
+
+	//Envoyer image vers fenetre
+	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->mlx->img, 0, 0);
+	mlx_do_sync(game->mlx->ptr);
+
 	return (1);
 }
 

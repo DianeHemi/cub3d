@@ -52,7 +52,7 @@ void	ft_init_player_pos(t_config *config, t_ray *ray)
 {
 	ray->pos_x = config->player_x + .5;
 	ray->pos_y = config->player_y + .5;
-	ray->plane_x = 0.66;
+	ray->plane_x = 60;
 	ray->plane_y = 0.;
 	if (config->player_start == 'N')
 		ft_set_dir(ray, 0., -1.);

@@ -12,19 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-int	ft_errors(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		write(2, &str[i], 1);
-		i++;
-	}
-	return (0);
-}
-
 int ft_check_extension(char *str)
 {
 	int i;
@@ -74,11 +61,15 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	ft_init_config(&config);
 	if (!ft_parsing(argv[1], &config))
+	{
+		ft_free_tex(&config);
 		return (EXIT_FAILURE);
+	}
 	if (!ft_check_config(&config))
 	{
 		ft_free_tab(config.map);
-		ft_errors("Error : Configuration is invalid.\n");
+		ft_free_tex(&config);
+		ft_putstr_fd("Error : Configuration is invalid.\n", 2);
 		return (EXIT_FAILURE);
 	}
 	if (!ft_launch_mlx(&mlx, &config))

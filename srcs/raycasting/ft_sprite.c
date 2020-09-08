@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <stdio.h>///
-
 
 
 /*--------------------------------------------*/
@@ -89,8 +87,6 @@ void 	ft_draw_sprite(t_config *config, t_sprite_data *s_data, t_sprite *sprite, 
 		s_data->drawEnd_x = config->width - 1;
 }
 
-
-
 void 	ft_sprite_tex(t_sprite_data *s_data, t_game *game)
 {
 	int stripe;
@@ -113,9 +109,6 @@ void 	ft_sprite_tex(t_sprite_data *s_data, t_game *game)
 		stripe++;
 	}
 }
-
-
-
 
 void	ft_sprite_management(t_game *game, t_config *config)
 {

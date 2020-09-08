@@ -19,13 +19,13 @@ int	ft_get_config(t_config *config, char *line)
 	else if ((line[0] == 'F' && line[1] == ' ')
 		|| (line[0] == 'C' && line[1] == ' '))
 		return (ft_get_colors(config, line));
-	else if (line[0] == 'N' && line[1] == 'O')
+	else if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
 		return (ft_get_wall_north(config, &line[2]));
-	else if (line[0] == 'S' && line[1] == 'O')
+	else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
 		return (ft_get_wall_south(config, &line[2]));
-	else if (line[0] == 'E' && line[1] == 'A')
+	else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
 		return (ft_get_wall_east(config, &line[2]));
-	else if (line[0] == 'W' && line[1] == 'E')
+	else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
 		return (ft_get_wall_west(config, &line[2]));
 	else if (line[0] == 'S' && line[1] == ' ')
 		return (ft_get_sprite(config, &line[1]));
@@ -33,6 +33,28 @@ int	ft_get_config(t_config *config, char *line)
 		return (1);
 	else
 		return (0);
+}
+
+int		ft_get_map(int fd, char *line, t_config *config)
+{
+	int		read;
+	char	*map_tmp;
+	char	*tmp;
+
+	map_tmp = ft_strdup(line);
+	free(line);
+	while ((read = get_next_line(fd, &line)) > 0)
+	{
+		tmp = map_tmp;
+		map_tmp = ft_strjoin(map_tmp, line);
+		free(tmp);
+		free(line);	
+	}
+	free(line);
+	config->map = ft_split(map_tmp, '\n');
+	free(map_tmp);
+	config->nb_sprite = ft_get_nb_sprite(config);
+	return (1);
 }
 
 int		ft_is_map(char *line)
@@ -63,7 +85,7 @@ int	ft_parsing(char *map, t_config *config)
 
 	read = 0;
 	if ((fd = open(map, O_RDONLY)) < 0)
-		return (ft_errors("Error: cannot open map\n"));
+		return (ft_errors("Error: cannot open map file.\n"));
 	while ((read = get_next_line(fd, &line)) != 0 && !ft_is_map(line))
 	{
 		if (!ft_get_config(config, line))
@@ -72,11 +94,13 @@ int	ft_parsing(char *map, t_config *config)
 			return (ft_errors("Error : Configuration is invalid.\n"));
 		}
 		free(line);
-	}	
+	}
 	if (ft_is_map(line))
-		ft_get_map(fd, line, config);
+		read = ft_get_map(fd, line, config);
 	else
-		return (ft_errors("Error : Map is missing or incorrect.\n"));
+		free(line);
 	close(fd);
+	if (read != 1)
+		return (ft_errors("Error : Map is missing.\n"));
 	return (1);
 }

@@ -280,7 +280,6 @@ void	ft_get_wall_dist(t_ray *ray, int x);
 void	ft_init_drawing(t_ray *ray, t_config *config, t_draw *draw, int t_height);
 void	ft_get_tex_coords(t_ray *ray, t_game *game);
 void	ft_draw_colors(t_game *game, t_draw *draw);
-void	my_mlx_pixel_put(t_mlx *mlx, int y, int x, int color);
 
 /*
 *** Key events

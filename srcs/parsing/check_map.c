@@ -90,9 +90,6 @@ int	ft_check_map(t_config *config)
 	int x;
 
 	y = 0;
-	if (!ft_check_top_bot(config) || !ft_check_sides(config)
-		|| !ft_check_middle(config))
-		return (ft_errors("Map is not closed.\n"));
 	while (config->map[y])
 	{
 		x = 0;
@@ -109,5 +106,8 @@ int	ft_check_map(t_config *config)
 		}
 		y++;
 	}
+	if (!ft_check_top_bot(config) || !ft_check_sides(config)
+		|| !ft_check_middle(config))
+		return (ft_errors("Map is not closed.\n"));
 	return (1);
 }

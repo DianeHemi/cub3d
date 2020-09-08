@@ -12,15 +12,23 @@
 
 #include "../../includes/cub3d.h"
 
-void	ft_free_tab(char **str)
+void	my_mlx_pixel_put(t_mlx *mlx, int y, int x, int color)
+{
+	char	*dst;
+
+	dst = mlx->img_ptr + (y * mlx->size_line + x * mlx->bpp);
+	*(unsigned int *)dst = color;
+}
+
+int	ft_errors(char *str)
 {
 	int i;
 
 	i = 0;
 	while (str[i])
 	{
-		free(str[i]);
+		write(2, &str[i], 1);
 		i++;
 	}
-	free(str);
+	return (0);
 }

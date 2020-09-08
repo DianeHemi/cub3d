@@ -14,24 +14,14 @@
 # define CUB3D_H
 
 # include <math.h>
-# include "../minilibx-linux/mlx.h" //A enlever
+# include <mlx.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
 # include "config.h"
 # include "utils.h"
 # include "raycasting.h"
 # include "get_next_line.h"
-
-
-
-/*
-*** Fonctions
-*/
-
-int	ft_errors(char *str);
-
-
+# include "../libft/libft.h"
 
 #endif

@@ -12,30 +12,52 @@
 
 #include "../../includes/cub3d.h"
 
-int 	ft_exit(t_game *game)
+void		ft_free_tab(char **str)
 {
-	ft_free_tab(game->config->map);
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+void ft_free_tex(t_config *config)
+{
+	free(config->north_tex);
+	free(config->south_tex);
+	free(config->east_tex);
+	free(config->west_tex);
+	free(config->sprite_tex);
+}
+
+static void	ft_destroy_imgs(t_game *game)
+{
+	int i;
 
 	mlx_destroy_image(game->mlx->ptr, game->mlx->img);
 	game->mlx->img = NULL;
-	mlx_destroy_image(game->mlx->ptr, game->tex[0].ptr);
-	mlx_destroy_image(game->mlx->ptr, game->tex[1].ptr);
-	mlx_destroy_image(game->mlx->ptr, game->tex[2].ptr);
-	mlx_destroy_image(game->mlx->ptr, game->tex[3].ptr);
-	mlx_destroy_image(game->mlx->ptr, game->tex[4].ptr);
-
+	i = 0;
+	while (i < 5)
+	{
+		mlx_destroy_image(game->mlx->ptr, game->tex[i].ptr);
+		i++;
+	}
 	mlx_clear_window(game->mlx->ptr, game->mlx->win);
 	mlx_destroy_window(game->mlx->ptr, game->mlx->win);
-
-	free(game->mlx->ptr);
-	game->mlx->ptr = NULL;
-
-
 	free(game->sprite);
 	free(game->ray->zbuffer);
+}
 
-
-
+int 		ft_exit(t_game *game)
+{
+	ft_free_tab(game->config->map);
+	ft_destroy_imgs(game);
+	free(game->mlx->ptr);
+	game->mlx->ptr = NULL;
 	exit(EXIT_SUCCESS);
 	return (1);
 }

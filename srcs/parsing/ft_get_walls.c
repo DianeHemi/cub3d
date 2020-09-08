@@ -28,7 +28,6 @@ int ft_get_wall_north(t_config *config, char *line)
 	if (line[end] != '\0')
 		end++;
 	config->north_tex = ft_substr(line, start, end - start - 1);
-	//ft_strncpy(&line[start], config->north_tex, end - start - 1);
 	return (1);
 }
 
@@ -47,7 +46,6 @@ int ft_get_wall_south(t_config *config, char *line)
 		end++;
 	if (line[end] != '\0')
 		end++;
-	//ft_strncpy(&line[start], config->south_tex, end - start - 1);
 	config->south_tex = ft_substr(line, start, end - start - 1);
 	return (1);
 }
@@ -68,7 +66,6 @@ int ft_get_wall_east(t_config *config, char *line)
 	if (line[end] != '\0')
 		end++;
 	config->east_tex = ft_substr(line, start, end - start - 1);
-	//ft_strncpy(&line[start], config->east_tex, end - start - 1);
 	return (1);
 }
 
@@ -88,6 +85,5 @@ int ft_get_wall_west(t_config *config, char *line)
 	if (line[end] != '\0')
 		end++;
 	config->west_tex = ft_substr(line, start, end - start - 1);
-	//ft_strncpy(&line[start], config->west_tex, end - start - 1);
 	return (1);
 }

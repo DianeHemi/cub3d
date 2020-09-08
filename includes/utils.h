@@ -22,7 +22,10 @@
 */
 void	ft_free_tab(char **str);
 int 	ft_exit(t_game *game);
+void 	ft_free_tex(t_config *config);
 
+void	my_mlx_pixel_put(t_mlx *mlx, int y, int x, int color);
+int		ft_errors(char *str);
 
 /*
 *** Utilitaires

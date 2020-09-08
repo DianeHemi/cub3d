@@ -12,30 +12,6 @@
 
 #include "../../includes/cub3d.h"
 
-double ft_correct_ratio(double ratio)
-{
-	double i;
-
-	i = 0.1;
-	if (ratio > 1.4)
-	{	
-		while (ratio * i < 1.25)
-			i += 0.1;
-	}
-	else if (ratio > 0.9 && ratio < 1.1)
-	{
-		while (ratio * i < 0.75)
-			i += 0.1;
-	}
-	else
-	{
-		while (ratio * i < 0.6)
-			i += 0.1;
-	}
-	return (ratio * i);
-}
-
-
 int	ft_get_resolution(t_config *config, char *line)
 {
 	int i;
@@ -49,11 +25,6 @@ int	ft_get_resolution(t_config *config, char *line)
 	while (line[i] != ' ')
 		i++;
 	config->height = ft_atoi(&line[i]);
-	config->ratio = (double)config->width / (double)config->height;
-	if ((config->ratio > 1.25 && config->ratio < 1.4))
-		config->ratio = 1.;
-	else 
-		config->ratio = ft_correct_ratio(config->ratio);
 	return (1);
 }
 
@@ -87,6 +58,5 @@ int	ft_get_sprite(t_config *config, char *line)
 	if (line[end] != '\0')
 		end++;
 	config->sprite_tex = ft_substr(line, start, end - start - 1);
-	//ft_strncpy(&line[start], config->sprite_tex, end - start - 1);
 	return (1);
 }

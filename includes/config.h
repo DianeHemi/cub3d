@@ -22,7 +22,6 @@ typedef	struct s_config
 {
 	int			width;
 	int			height;
-	double 		ratio;
 
 	char		**map;
 
@@ -44,10 +43,7 @@ typedef	struct s_config
 }				t_config;
 
 
-/*
-*** Fonctions
-*/
-int		get_next_line(int fd, char **line);
+
 
 /*
 *** Fonctions de parsing

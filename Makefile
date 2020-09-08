@@ -39,15 +39,11 @@ SRCS 	+=	./srcs/parsing/parsing.c \
 			./srcs/parsing/ft_get_walls.c \
 			./srcs/parsing/ft_get_data.c \
 			./srcs/parsing/ft_get_colors.c \
-			./srcs/parsing/ft_get_map.c \
 			./srcs/parsing/check_map.c
 
 #GNL
 SRCS 	+=	./srcs/gnl/get_next_line.c \
 			./srcs/gnl/get_next_line_utils.c
-
-# bmp
-#SRCS 	+= ./srcs/bmp/
 
 # Raytracing
 SRCS 	+= ./srcs/raycasting/ft_launch_prog.c \
@@ -55,8 +51,7 @@ SRCS 	+= ./srcs/raycasting/ft_launch_prog.c \
 			./srcs/raycasting/ft_draw.c \
 			./srcs/raycasting/ft_move.c \
 			./srcs/raycasting/ft_save.c \
-			./srcs/raycasting/ft_sprite.c \
-			./srcs/raycasting/ft_main_loop.c
+			./srcs/raycasting/ft_sprite.c
 
 # Utils
 SRCS 	+= 	./srcs/utils/ft_init.c \
@@ -64,6 +59,7 @@ SRCS 	+= 	./srcs/utils/ft_init.c \
 			./srcs/utils/ft_utils.c \
 			./srcs/utils/ft_strncpy.c \
 			./srcs/utils/ft_exit.c \
+			./srcs/utils/ft_sprite_utils.c \
 			./srcs/utils/ft_init_texture_sprite.c \
 			./srcs/utils/ft_storage.c
 
@@ -89,17 +85,17 @@ OBJS		= $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(LIB) $(OBJS) mlxcomp 
+.c.o:
+	$(CC) $(INC_ALL) $(ENV) $(CFLAGS) -g -c $< -o ${<:.c=.o} 
+
+$(NAME): $(LIB) $(OBJS)
+	$(MAKE) -C $(MLX_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@ $(MLX) -L$(LIBPATH) -lft
 
 $(LIB):
 	make -C $(LIBPATH)
 
-.c.o:
-	$(CC) $(CFLAGS) $(ENV) -g -c $< -o ${<:.c=.o} $(INC_ALL)
-
-mlxcomp:
-	$(MAKE) -C $(MLX_DIR)
+	
 
 #bonus: ${OBJS} ${OBJSBONUS}
 

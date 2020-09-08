@@ -21,7 +21,7 @@ void 	ft_draw_sprite(t_config *config, t_sprite_data *s_data, t_sprite *sprite, 
 	s_data->transformY = s_data->invDet * (-game->ray->plane_y * s_data->x + game->ray->plane_x * s_data->y);
 	s_data->screen_x = (int)((config->width / 2) * (1 + s_data->transformX / s_data->transformY));
 	//Calculate height of sprite on screen
-	s_data->s_height = (int)(((config->width / 2) / tan(30 * (M_PI/180))) / (s_data->transformY));
+	s_data->s_height = (int)(((config->width / 2) / tan(32 * (M_PI/180))) / (s_data->transformY));
 	//get stripe size
 	s_data->drawStart_y = -s_data->s_height / 2 + config->height / 2;
 	if (s_data->drawStart_y < 0)
@@ -30,7 +30,7 @@ void 	ft_draw_sprite(t_config *config, t_sprite_data *s_data, t_sprite *sprite, 
 	if (s_data->drawEnd_y >= config->height)
 		s_data->drawEnd_y = config->height - 1;
 	//Calcul de la width du sprite
-	s_data->s_width = (int)(((config->width / 2) / tan(30 * (M_PI/180))) / (s_data->transformY));
+	s_data->s_width = (int)(((config->width / 2) / tan(32 * (M_PI/180))) / (s_data->transformY));
 	s_data->drawStart_x = -s_data->s_width / 2 + s_data->screen_x;
 	if (s_data->drawStart_x < 0)
 		s_data->drawStart_x = 0;

@@ -69,7 +69,7 @@ void		ft_get_tex_coords(t_ray *ray, t_game *game)
 void		ft_init_drawing(t_ray *ray, t_config *config, t_draw *draw, int t_height)
 {
 	//Calculate height of line to draw on screen
-	draw->lineHeight = (int)((config->width / 2) / tan(30 * (M_PI/180)) / ray->perpWallDist);
+	draw->lineHeight = (int)((config->width / 2) / tan(32 * (M_PI/180)) / ray->perpWallDist);
 	//calculate lowest and highest pixel to fill in current stripe
 	draw->drawStart = -(draw->lineHeight) / 2 + config->height / 2;
 	draw->drawEnd = (draw->lineHeight) / 2 + config->height / 2;

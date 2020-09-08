@@ -29,8 +29,19 @@ void 	ft_draw_sprite(t_config *config, t_sprite_data *s_data, t_sprite *sprite, 
 	s_data->drawEnd_y = s_data->s_height / 2 + config->height / 2;
 	if (s_data->drawEnd_y >= config->height)
 		s_data->drawEnd_y = config->height - 1;
+	
+
 	//Calcul de la width du sprite
-	s_data->s_width = (int)(((config->width / 2) / tan(32 * (M_PI/180))) / (s_data->transformY));
+	if (game->tex[4].width == game->tex[4].height)
+		s_data->s_width = (int)(((config->width / 2) / tan(32 * (M_PI/180))) / (s_data->transformY));
+	else if (game->tex[4].width <= game->tex[4].height)
+		s_data->s_width = (int)((config->width / 2) / (s_data->transformY));
+	else
+		s_data->s_width = (int)(((config->width)) / (s_data->transformY));
+	//Gestion en fonction de la taille du sprite
+
+
+
 	s_data->drawStart_x = -s_data->s_width / 2 + s_data->screen_x;
 	if (s_data->drawStart_x < 0)
 		s_data->drawStart_x = 0;

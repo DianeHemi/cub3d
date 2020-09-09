@@ -6,7 +6,7 @@
 #    By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 14:17:45 by dchampda          #+#    #+#              #
-#    Updated: 2020/07/07 17:50:27 by dchampda         ###   ########.fr        #
+#    Updated: 2020/09/09 10:12:53 by dchampda         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ ifeq ($(UNAME), Linux)
 	ENV		= -D LINUX
 	CC		=	clang
 else
-	MLX_DIR	= ./minilibx_opengl_20191021
+	MLX_DIR	= ./minilibx_mms_20200219
 	MLX 	= -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
 	ENV		=
 	CC		=	gcc
@@ -89,11 +89,9 @@ all: $(NAME)
 	$(CC) $(INC_ALL) $(ENV) $(CFLAGS) -g -c $< -o ${<:.c=.o} 
 
 $(NAME): $(LIB) $(OBJS)
+	$(MAKE) -C $(LIBPATH)
 	$(MAKE) -C $(MLX_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@ $(MLX) -L$(LIBPATH) -lft
-
-$(LIB):
-	make -C $(LIBPATH)
 
 	
 

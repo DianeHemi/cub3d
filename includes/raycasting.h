@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 12:50:36 by dchampda          #+#    #+#             */
-/*   Updated: 2020/07/13 12:50:38 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/09/09 10:43:29 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@
 #  define BACKWD 	1
 #  define LEFT 		0
 #  define RIGHT 	2
-#  define TURN_L 	123
-#  define TURN_R 	124
+#  define TURN_L 	124
+#  define TURN_R 	123
 #  define ESC 		53
 #  define EXIT_BTN	17
 #  endif

@@ -6,7 +6,7 @@
 /*   By: diane <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 18:25:35 by diane             #+#    #+#             */
-/*   Updated: 2020/08/01 18:25:38 by diane            ###   ########.fr       */
+/*   Updated: 2020/09/09 16:43:13 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void 	ft_draw_sprite(t_config *config, t_sprite_data *s_data, t_sprite *sprite, t_game *game)
 {
+	double ratio;
+
+	ratio = (double)game->tex[4].height / (double)game->tex[4].width;
+
 	s_data->x = sprite->x - game->ray->pos_x;
 	s_data->y = sprite->y - game->ray->pos_y;
 	s_data->invDet = 1.0 / (game->ray->plane_x * game->ray->dir_y - game->ray->dir_x * game->ray->plane_y);
@@ -30,16 +34,14 @@ void 	ft_draw_sprite(t_config *config, t_sprite_data *s_data, t_sprite *sprite, 
 	if (s_data->drawEnd_y >= config->height)
 		s_data->drawEnd_y = config->height - 1;
 	
-
 	//Calcul de la width du sprite
 	if (game->tex[4].width == game->tex[4].height)
 		s_data->s_width = (int)(((config->width / 2) / tan(32 * (M_PI/180))) / (s_data->transformY));
 	else if (game->tex[4].width <= game->tex[4].height)
-		s_data->s_width = (int)((config->width / 2) / (s_data->transformY));
+		s_data->s_width = (int)(((config->width / 2) * ratio) / (s_data->transformY));
 	else
-		s_data->s_width = (int)(((config->width)) / (s_data->transformY));
+		s_data->s_width = (int)(((config->width / 2) / ratio) / (s_data->transformY));
 	//Gestion en fonction de la taille du sprite
-
 
 
 	s_data->drawStart_x = -s_data->s_width / 2 + s_data->screen_x;

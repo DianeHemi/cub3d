@@ -25,7 +25,7 @@ void		ft_free_tab(char **str)
 	free(str);
 }
 
-void ft_free_tex(t_config *config)
+void 		ft_free_tex(t_config *config)
 {
 	free(config->north_tex);
 	free(config->south_tex);
@@ -48,7 +48,7 @@ static void	ft_destroy_imgs(t_game *game)
 	}
 	mlx_clear_window(game->mlx->ptr, game->mlx->win);
 	mlx_destroy_window(game->mlx->ptr, game->mlx->win);
-	free(game->sprite);
+	free(game->sprite->pos);
 	free(game->ray->zbuffer);
 }
 

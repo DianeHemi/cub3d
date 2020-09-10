@@ -75,7 +75,7 @@ int 		ft_get_nb_sprite(t_config *data)
 	return (nb_sprite);
 }
 
-void	ft_get_pos_sprite(t_sprite *sprite, t_config *data, t_game *game)
+void	ft_get_pos_sprite(t_sprite_data *sprite, t_config *data)
 {
 	int x;
 	int y;
@@ -90,13 +90,13 @@ void	ft_get_pos_sprite(t_sprite *sprite, t_config *data, t_game *game)
 		{
 			if (data->map[y][x] == '2')
 			{
-				sprite[i].x = (double)x + 0.5;
-				sprite[i].y = (double)y + 0.5;
+				sprite->pos[i].x = (double)x + 0.5;
+				sprite->pos[i].y = (double)y + 0.5;
 				i++;
 			}
 			x++;
 		}
 		y++;
 	}
-	game->sprite = sprite;
+	
 }

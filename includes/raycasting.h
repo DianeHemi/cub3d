@@ -168,6 +168,7 @@ typedef struct s_sprite
 {
 	double		x;
 	double		y;
+	double 		dist;
 }			t_sprite;
 
 typedef struct s_sprite_data
@@ -176,14 +177,16 @@ typedef struct s_sprite_data
 	double 		y;
 	int 		d;
 
+	t_sprite 	*pos;
+
+	double 		ratio;
+
 	double 		invDet;
 	double 		dist;
 
 	double 		transformX;
 	double 		transformY;
 	int 		screen_x;
-
-	int 		factor_128;
 
 
 	int 		s_height;
@@ -229,7 +232,7 @@ typedef struct s_game
 	t_mlx		*mlx;
 	t_ray		*ray;
 	t_texture	*tex;
-	t_sprite	*sprite;
+	t_sprite_data	*sprite;
 	t_move		*move;
 }			t_game;
 

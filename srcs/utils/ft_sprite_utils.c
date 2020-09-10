@@ -23,11 +23,10 @@ void 	ft_swap_sprites(t_sprite *sprite1, t_sprite *sprite2)
 
 double		ft_sprite_dist(t_ray *ray, t_sprite *sprite)
 {
-	double sprite_dist;
 
-	sprite_dist = ((ray->pos_x - sprite->x) * (ray->pos_x - sprite->x) 
+	sprite->dist = ((ray->pos_x - sprite->x) * (ray->pos_x - sprite->x) 
 			+ (ray->pos_y - sprite->y) * (ray->pos_y - sprite->y));
-	return (sprite_dist);
+	return (sprite->dist);
 }
 
 void		ft_sort_sprites(t_game *game, int nb_sprite)
@@ -39,9 +38,9 @@ void		ft_sort_sprites(t_game *game, int nb_sprite)
 	while (i < nb_sprite)
 	{
 		j = i;
-		while (j > 0 && ft_sprite_dist(game->ray, &game->sprite[j - 1]) < ft_sprite_dist(game->ray, &game->sprite[j]))
+		while (j > 0 && ft_sprite_dist(game->ray, &game->sprite->pos[j - 1]) < ft_sprite_dist(game->ray, &game->sprite->pos[j]))
 		{
-			ft_swap_sprites(&game->sprite[j], &game->sprite[j - 1]);
+			ft_swap_sprites(&game->sprite->pos[j], &game->sprite->pos[j - 1]);
 			j--;
 		}
 		i++;

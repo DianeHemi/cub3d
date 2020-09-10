@@ -75,12 +75,13 @@ int ft_launch_prog(t_config *data, t_mlx *mlx, int save_opt)
 	t_game		game;
 	t_ray 		ray;
 	t_texture	tex[5];
-	t_sprite	*sprite;
+	t_sprite_data	sprite;
 	t_move		move;
 
-	if (!(sprite = malloc(sizeof(*sprite) * data->nb_sprite)))
+	if (!(sprite.pos = malloc(sizeof(t_sprite) * data->nb_sprite)))
 		return (ft_errors("Memory allocation failed.\n"));
-	ft_get_pos_sprite(sprite, data, &game);
+	ft_get_pos_sprite(&sprite, data);
+	game.sprite = &sprite;
 
 	if (!(ft_init_textures(data, &game, tex, mlx)))
 		return (ft_errors("Error : Texture file can't be initialised.\n"));

@@ -44,7 +44,7 @@ int 	ft_init_textures(t_config *data, t_game *game,
 						t_texture *texture, t_mlx *mlx);
 
 
-void	ft_get_pos_sprite(t_sprite *sprite, t_config *data, t_game *game);
+void	ft_get_pos_sprite(t_sprite_data *sprite, t_config *data);
 int 	ft_get_nb_sprite(t_config *data);
 
 
@@ -55,9 +55,9 @@ int		ft_init_store(t_config *data, t_ray *ray,
 void	ft_init_tex_struct(t_game *game);
 void	ft_init_move(t_move *move, t_game *game);
 
-void 	ft_swap_sprites(t_sprite *sprite1, t_sprite *sprite2);
-double		ft_sprite_dist(t_ray *ray, t_sprite *sprite);
+
 void		ft_sort_sprites(t_game *game, int nb_sprite);
+double		ft_sprite_dist(t_ray *ray, t_sprite *sprite);
 
 
 #endif

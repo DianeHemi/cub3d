@@ -32,3 +32,13 @@ int	ft_errors(char *str)
 	}
 	return (0);
 }
+
+int		ft_store_struct(t_config *data, t_ray *ray, t_mlx *mlx, t_game *game)
+{
+	game->mlx = mlx;
+	game->config = data;
+	game->ray = ray;
+	if(!(game->ray->zbuffer = malloc(sizeof(double) * game->config->width)))
+		return (ft_errors("Memory allocation failed.\n"));
+	return (1);
+}

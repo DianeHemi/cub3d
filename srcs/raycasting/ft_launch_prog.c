@@ -12,9 +12,9 @@
 
 #include "../../includes/cub3d.h"
 
-int ft_init_image(t_config *data, t_mlx *mlx)
+int	ft_init_image(t_config *config, t_mlx *mlx)
 {
-	if (!(mlx->img = mlx_new_image(mlx->ptr, data->width, data->height)))
+	if (!(mlx->img = mlx_new_image(mlx->ptr, config->width, config->height)))
 		return (0);
 	mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp, 
 		&mlx->size_line, &mlx->endian);
@@ -24,7 +24,7 @@ int ft_init_image(t_config *data, t_mlx *mlx)
 	return (1);
 }
 
-int ft_adjust_resolution(t_mlx *mlx, t_config *data)
+int	ft_adjust_resolution(t_mlx *mlx, t_config *config)
 {
 	int width;
 	int height;
@@ -34,76 +34,60 @@ int ft_adjust_resolution(t_mlx *mlx, t_config *data)
 		return (0);
 	else
 	{
-		data->width = data->width > width ? width : data->width;
-		data->height = data->height > height ? height : data->height;
+		config->width = config->width > width ? width : config->width;
+		config->height = config->height > height ? height : config->height;
 		return (1);
 	}
 }
 
-int ft_launch_mlx(t_mlx *mlx, t_config *data)
+int	ft_launch_mlx(t_mlx *mlx, t_config *config)
 {
 	if ((mlx->ptr = mlx_init()) == NULL)
 		return (ft_errors("Initialisation failed.\n"));
-	if (!ft_adjust_resolution(mlx, data))
+	if (!ft_adjust_resolution(mlx, config))
 		return (ft_errors("An error occured while resizing the window.\n"));
-	if (!(mlx->win = mlx_new_window(mlx->ptr, data->width, data->height, "Cub3D")))
+	if (!(mlx->win = mlx_new_window(mlx->ptr, config->width, config->height, "Cub3D")))
 		return (ft_errors("Window couldn't be initialised.\n"));
-	if (!(ft_init_image(data, mlx)))
+	if (!(ft_init_image(config, mlx)))
 		return (ft_errors("Image initialisation failed.\n"));
 	return (1);
 }
 
-int 	ft_main_loop(t_game *game)
+int	ft_main_loop(t_game *game)
 {
 	ft_raycasting(game);
-
-	//Sprite management
-	ft_sprite_management(game, game->config);
-
-	//Gestion des déplacements
+	ft_sprite_management(game, game->sprite, game->config);
 	ft_move_player(game->move, game->ray, game->config);
-
-	//Envoyer image vers fenetre
 	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->mlx->img, 0, 0);
 	mlx_do_sync(game->mlx->ptr);
-
 	return (1);
 }
 
-int ft_launch_prog(t_config *data, t_mlx *mlx, int save_opt)
+int	ft_launch_prog(t_config *config, t_mlx *mlx, int save_opt)
 {
 	t_game		game;
 	t_ray 		ray;
 	t_texture	tex[5];
-	t_sprite_data	sprite;
+	t_sprite	sprite;
 	t_move		move;
 
-	if (!(sprite.pos = malloc(sizeof(t_sprite) * data->nb_sprite)))
+	if (!(sprite.s_pos = malloc(sizeof(t_s_pos) * config->nb_sprite)))
 		return (ft_errors("Memory allocation failed.\n"));
-	ft_get_pos_sprite(&sprite, data);
+	ft_get_pos_sprite(&sprite, config);
 	game.sprite = &sprite;
-
-	if (!(ft_init_textures(data, &game, tex, mlx)))
+	if (!(ft_init_textures(config, &game, tex, mlx)))
 		return (ft_errors("Error : Texture file can't be initialised.\n"));
-
-	//Storage
-	if (!ft_init_store(data, &ray, mlx, &game))
-		return (0);
+	if (!ft_store_struct(config, &ray, mlx, &game))
+		return (ft_errors("Stucture storage failed.\n"));
 	ft_init_move(&move, &game);
 	ft_init_player_pos(game.config, game.ray);
-
-	//Fonction qui sauvegarde en bmp !
 	if (save_opt == 1)
 		ft_save(&game);
 
-	//Fonction qui gère l'appui sur une touche
 	mlx_hook(mlx->win, 2, 1L<<0, ft_keypress, &game);
-	//Fonction qui gère le relachement d'une touche
 	mlx_hook(mlx->win, 3, 1L<<1, ft_keyrelease, &game);
-	//Fonction pour quitter proprement
 	mlx_hook(mlx->win, EXIT_BTN, 1L<<17, ft_exit, &game);
 	mlx_loop_hook(mlx->ptr, ft_main_loop, &game);
 	mlx_loop(mlx->ptr);
-
 	return (1);
 }

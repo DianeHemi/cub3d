@@ -44,14 +44,14 @@ void	ft_init_move(t_move *move, t_game *game)
 
 void	ft_set_dir(t_ray *ray, double x, double y)
 {
-	ray->dir_x = x;
-	ray->dir_y = y;
+	ray->dir.x = x;
+	ray->dir.y = y;
 }
 
 void	ft_init_player_pos(t_config *config, t_ray *ray)
 {
-	ray->pos_x = config->player_x + .5;
-	ray->pos_y = config->player_y + .5;
+	ray->pos.x = config->player_x + .5;
+	ray->pos.y = config->player_y + .5;
 	ray->plane_x = 0.66;
 	ray->plane_y = 0.;
 	if (config->player_start == 'N')

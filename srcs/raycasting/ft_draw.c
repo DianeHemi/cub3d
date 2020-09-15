@@ -23,13 +23,13 @@ static void	ft_get_color(t_draw *draw, t_texture *tex)
 void		ft_draw_colors(t_game *game, t_draw *draw)
 {
 	draw->y = 0;
-	while (draw->y < draw->drawStart)
+	while (draw->y < draw->draw_start)
 	{
 		draw->color = game->config->c_color;
 		my_mlx_pixel_put(game->mlx, draw->y, draw->x, draw->color);
 		draw->y++;
 	}
-	while (draw->y < draw->drawEnd)
+	while (draw->y < draw->draw_end)
 	{
 		ft_get_color(draw, &(game->tex[draw->side]));
 		my_mlx_pixel_put(game->mlx, draw->y, draw->x, draw->color);
@@ -47,41 +47,42 @@ void		ft_get_tex_coords(t_ray *ray, t_game *game)
 {
 	//Get wall that was hit
 	if (ray->side == 1)
-		ray->wallDir = ray->rayDir_y < 0 ? 1 : 0;
+		ray->wall_dir = ray->ray_dir.y < 0 ? 1 : 0;
 	else
-		ray->wallDir = ray->rayDir_x < 0 ? 2 : 3;
+		ray->wall_dir = ray->ray_dir.x < 0 ? 2 : 3;
 	//Calculate where the wall was hit
 	if (ray->side == 0)
-		ray->wallX = ray->pos_y + ray->perpWallDist * ray->rayDir_y;
+		ray->wall_x = ray->pos.y + ray->wall_dist * ray->ray_dir.y;
 	else
-		ray->wallX = ray->pos_x + ray->perpWallDist * ray->rayDir_x;
+		ray->wall_x = ray->pos.x + ray->wall_dist * ray->ray_dir.x;
 	
-	ray->wallX -= floor(ray->wallX);
+	ray->wall_x -= floor(ray->wall_x);
 
 	//tex_x = x coordinate on the texture
-	game->tex[ray->wallDir].tex_x = (int)(ray->wallX * (double)game->tex[ray->wallDir].width);
-	if (ray->side == 0 && ray->rayDir_x > 0)
-		game->tex[ray->wallDir].tex_x = game->tex[ray->wallDir].width - game->tex[ray->wallDir].tex_x - 1;
-	if (ray->side == 1 && ray->rayDir_y < 0)
-		game->tex[ray->wallDir].tex_x = game->tex[ray->wallDir].width - game->tex[ray->wallDir].tex_x - 1;
+	game->tex[ray->wall_dir].tex_x = (int)(ray->wall_x * (double)game->tex[ray->wall_dir].width);
+	if (ray->side == 0 && ray->ray_dir.x > 0)
+		game->tex[ray->wall_dir].tex_x = game->tex[ray->wall_dir].width - game->tex[ray->wall_dir].tex_x - 1;
+	if (ray->side == 1 && ray->ray_dir.y < 0)
+		game->tex[ray->wall_dir].tex_x = game->tex[ray->wall_dir].width - game->tex[ray->wall_dir].tex_x - 1;
 }
 
-void		ft_init_drawing(t_ray *ray, t_config *config, t_draw *draw, int t_height)
+void		ft_init_drawing(t_ray *ray, t_config *config,
+			t_draw *draw, int tex_height)
 {
 	//Calculate height of line to draw on screen
-	draw->lineHeight = (int)((config->width / 2) / tan(32 * (M_PI/180)) / ray->perpWallDist);
+	draw->line_height = (int)((config->width / 2) / tan(32 * (M_PI/180)) / ray->wall_dist);
 	//calculate lowest and highest pixel to fill in current stripe
-	draw->drawStart = -(draw->lineHeight) / 2 + config->height / 2;
-	draw->drawEnd = (draw->lineHeight) / 2 + config->height / 2;
+	draw->draw_start = -(draw->line_height) / 2 + config->height / 2;
+	draw->draw_end = (draw->line_height) / 2 + config->height / 2;
 
-	draw->dist = ray->perpWallDist;
-	draw->side = ray->wallDir;
+	draw->dist = ray->wall_dist;
+	draw->side = ray->wall_dir;
 
-	if (draw->drawStart < 0)
-		draw->drawStart = 0;
-	if (draw->drawEnd >= config->height)
-		draw->drawEnd = config->height - 1;
+	if (draw->draw_start < 0)
+		draw->draw_start = 0;
+	if (draw->draw_end >= config->height)
+		draw->draw_end = config->height - 1;
 
-	draw->step = 1.0 * t_height / draw->lineHeight;
-	draw->tex_pos = (draw->drawStart - config->height / 2 + draw->lineHeight / 2) * draw->step;
+	draw->step = 1.0 * tex_height / draw->line_height;
+	draw->tex_pos = (draw->draw_start - config->height / 2 + draw->line_height / 2) * draw->step;
 }

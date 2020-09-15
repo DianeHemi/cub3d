@@ -56,9 +56,9 @@ void	ft_move_rotate(t_move *move, t_ray *ray)
 	//Rotation droite
 	if (move->turn_r == 1)
 	{
-		oldDir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(-move->rota_spd) - ray->dir_y * sin(-move->rota_spd);
-		ray->dir_y = oldDir_x * sin(-move->rota_spd) + ray->dir_y * cos(-move->rota_spd);
+		oldDir_x = ray->dir.x;
+		ray->dir.x = ray->dir.x * cos(-move->rota_spd) - ray->dir.y * sin(-move->rota_spd);
+		ray->dir.y = oldDir_x * sin(-move->rota_spd) + ray->dir.y * cos(-move->rota_spd);
 		oldPlane_x = ray->plane_x;
 		ray->plane_x = ray->plane_x * cos(-move->rota_spd) - ray->plane_y * sin(-move->rota_spd);
 		ray->plane_y = oldPlane_x * sin(-move->rota_spd) + ray->plane_y * cos(-move->rota_spd);
@@ -66,9 +66,9 @@ void	ft_move_rotate(t_move *move, t_ray *ray)
 	//Rotation gauche
 	if (move->turn_l == 1)
 	{
-		oldDir_x = ray->dir_x;
-		ray->dir_x = ray->dir_x * cos(move->rota_spd) - ray->dir_y * sin(move->rota_spd);
-		ray->dir_y = oldDir_x * sin(move->rota_spd) + ray->dir_y * cos(move->rota_spd);
+		oldDir_x = ray->dir.x;
+		ray->dir.x = ray->dir.x * cos(move->rota_spd) - ray->dir.y * sin(move->rota_spd);
+		ray->dir.y = oldDir_x * sin(move->rota_spd) + ray->dir.y * cos(move->rota_spd);
 		oldPlane_x = ray->plane_x;
 		ray->plane_x = ray->plane_x * cos(move->rota_spd) - ray->plane_y * sin(move->rota_spd);
 		ray->plane_y = oldPlane_x * sin(move->rota_spd) + ray->plane_y * cos(move->rota_spd);
@@ -80,18 +80,18 @@ void	ft_move_sideway(t_move *move, t_ray *ray, t_config *config)
 	//Deplacement a droite
 	if (move->right == 1)
 	{
-		if (config->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->plane_x * move->mv_spd)] != '1')
-			ray->pos_x += ray->plane_x * move->mv_spd;
-		if (config->map[(int)(ray->pos_y + ray->plane_y * move->mv_spd)][(int)(ray->pos_x)] != '1')
-			ray->pos_y += ray->plane_y * move->mv_spd;
+		if (config->map[(int)(ray->pos.y)][(int)(ray->pos.x + ray->plane_x * move->mv_spd)] != '1')
+			ray->pos.x += ray->plane_x * move->mv_spd;
+		if (config->map[(int)(ray->pos.y + ray->plane_y * move->mv_spd)][(int)(ray->pos.x)] != '1')
+			ray->pos.y += ray->plane_y * move->mv_spd;
 	}
 	//Deplacement a gauche
 	if (move->left == 1)
 	{
-		if (config->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->plane_x * move->mv_spd)] != '1')
-			ray->pos_x -= ray->plane_x * move->mv_spd;
-		if (config->map[(int)(ray->pos_y - ray->plane_y * move->mv_spd)][(int)(ray->pos_x)] != '1')
-			ray->pos_y -= ray->plane_y * move->mv_spd;
+		if (config->map[(int)(ray->pos.y)][(int)(ray->pos.x - ray->plane_x * move->mv_spd)] != '1')
+			ray->pos.x -= ray->plane_x * move->mv_spd;
+		if (config->map[(int)(ray->pos.y - ray->plane_y * move->mv_spd)][(int)(ray->pos.x)] != '1')
+			ray->pos.y -= ray->plane_y * move->mv_spd;
 	}
 }
 
@@ -100,18 +100,18 @@ void	ft_move_player(t_move *move, t_ray *ray, t_config *config)
 	//Avancer
 	if (move->forwd == 1)
 	{
-		if (config->map[(int)(ray->pos_y)][(int)(ray->pos_x + ray->dir_x * move->mv_spd)] != '1')
-			ray->pos_x += ray->dir_x * move->mv_spd;
-		if (config->map[(int)(ray->pos_y + ray->dir_y * move->mv_spd)][(int)(ray->pos_x)] != '1')
-			ray->pos_y += ray->dir_y * move->mv_spd;
+		if (config->map[(int)(ray->pos.y)][(int)(ray->pos.x + ray->dir.x * move->mv_spd)] != '1')
+			ray->pos.x += ray->dir.x * move->mv_spd;
+		if (config->map[(int)(ray->pos.y + ray->dir.y * move->mv_spd)][(int)(ray->pos.x)] != '1')
+			ray->pos.y += ray->dir.y * move->mv_spd;
 	}
 	//Reculer
 	if (move->backwd == 1)
 	{
-		if (config->map[(int)(ray->pos_y)][(int)(ray->pos_x - ray->dir_x * move->mv_spd)] != '1')
-			ray->pos_x -= ray->dir_x * move->mv_spd;
-		if (config->map[(int)(ray->pos_y - ray->dir_y * move->mv_spd)][(int)(ray->pos_x)] != '1')
-			ray->pos_y -= ray->dir_y * move->mv_spd;
+		if (config->map[(int)(ray->pos.y)][(int)(ray->pos.x - ray->dir.x * move->mv_spd)] != '1')
+			ray->pos.x -= ray->dir.x * move->mv_spd;
+		if (config->map[(int)(ray->pos.y - ray->dir.y * move->mv_spd)][(int)(ray->pos.x)] != '1')
+			ray->pos.y -= ray->dir.y * move->mv_spd;
 	}
 	ft_move_sideway(move, ray, config);
 	ft_move_rotate(move, ray);

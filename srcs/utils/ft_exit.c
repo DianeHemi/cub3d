@@ -38,26 +38,44 @@ static void	ft_destroy_imgs(t_game *game)
 {
 	int i;
 
-	mlx_destroy_image(game->mlx->ptr, game->mlx->img);
-	game->mlx->img = NULL;
 	i = 0;
-	while (i < 5)
+	if (game->mlx->ptr && game->mlx->img)
 	{
-		mlx_destroy_image(game->mlx->ptr, game->tex[i].ptr);
-		i++;
+		mlx_destroy_image(game->mlx->ptr, game->mlx->img);
+		game->mlx->img = NULL;
+		while (i < 5)
+		{
+			mlx_destroy_image(game->mlx->ptr, game->tex[i].ptr);
+			i++;
+		}
 	}
-	mlx_clear_window(game->mlx->ptr, game->mlx->win);
-	mlx_destroy_window(game->mlx->ptr, game->mlx->win);
-	free(game->sprite->pos);
+	free(game->sprite->s_pos);
 	free(game->ray->zbuffer);
+	if (game->mlx->ptr && game->mlx->win)
+	{
+		mlx_clear_window(game->mlx->ptr, game->mlx->win);
+		mlx_destroy_window(game->mlx->ptr, game->mlx->win);
+	}
 }
+
+
 
 int 		ft_exit(t_game *game)
 {
+	//struct s_xvar	*xvar;
+
 	ft_free_tab(game->config->map);
 	ft_destroy_imgs(game);
-	free(game->mlx->ptr);
-	game->mlx->ptr = NULL;
+
+/*
+	xvar = game->mlx->ptr;
+	if (xvar->private_cmap)
+		XFreeColormap(xvar->display, (Colormap)xvar->private_cmap);
+	XCloseDisplay(xvar->display);
+
+	free(xvar);*/
+
+	
 	exit(EXIT_SUCCESS);
 	return (1);
 }

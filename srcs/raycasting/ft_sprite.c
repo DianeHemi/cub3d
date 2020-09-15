@@ -12,70 +12,86 @@
 
 #include "../../includes/cub3d.h"
 
-void 	ft_draw_sprite(t_config *config, t_sprite_data *s_data, t_sprite sprite, t_game *game)
+void	ft_sprite_width(t_config *config, t_sprite *spr, t_game *game)
 {
-	s_data->ratio = (double)game->tex[4].height / (double)game->tex[4].width;
-	s_data->x = sprite.x - game->ray->pos_x;
-	s_data->y = sprite.y - game->ray->pos_y;
-	s_data->invDet = 1.0 / (game->ray->plane_x * game->ray->dir_y - game->ray->dir_x * game->ray->plane_y);
-	s_data->transformX = s_data->invDet * (game->ray->dir_y * s_data->x - game->ray->dir_x * s_data->y);
-	s_data->transformY = s_data->invDet * (-game->ray->plane_y * s_data->x + game->ray->plane_x * s_data->y);
-	s_data->screen_x = (int)((config->width / 2) * (1 + s_data->transformX / s_data->transformY));
-	s_data->s_height = (int)(((config->width / 2) / tan(32 * (M_PI/180))) / (s_data->transformY));
-	s_data->drawStart_y = -s_data->s_height / 2 + config->height / 2;
-	s_data->drawStart_y = s_data->drawStart_y < 0 ? 0 : s_data->drawStart_y;
-	s_data->drawEnd_y = s_data->s_height / 2 + config->height / 2;
-	if (s_data->drawEnd_y >= config->height)
-		s_data->drawEnd_y = config->height;
 	if (game->tex[4].width == game->tex[4].height)
-		s_data->s_width = (int)(((config->width / 2) / tan(32 * (M_PI/180))) / (s_data->transformY));
+		spr->width = (int)(((config->width / 2) / tan(32 * (M_PI / 180)))
+			/ (spr->transform.y));
 	else if (game->tex[4].width <= game->tex[4].height)
-		s_data->s_width = (int)(((config->width / 2) * s_data->ratio) / (s_data->transformY));
+		spr->width = (int)(((config->width / 2) * spr->ratio)
+			/ (spr->transform.y));
 	else
-		s_data->s_width = (int)(((config->width / 2) / s_data->ratio) / (s_data->transformY));
-	s_data->drawStart_x = -s_data->s_width / 2 + s_data->screen_x;
-	s_data->drawStart_x = s_data->drawStart_x < 0 ? 0 : s_data->drawStart_x;
-	s_data->drawEnd_x = s_data->s_width / 2 + s_data->screen_x;
-	if (s_data->drawEnd_x >= config->width)
-		s_data->drawEnd_x = config->width;
+		spr->width = (int)(((config->width / 2) / spr->ratio)
+			/ (spr->transform.y));
 }
 
-void 	ft_sprite_tex(t_sprite_data *s_data, t_game *game)
+void	ft_draw_sprite(t_config *config, t_sprite *spr,
+						t_s_pos s_pos, t_game *game)
+{
+	spr->x = s_pos.x - game->ray->pos.x;
+	spr->y = s_pos.y - game->ray->pos.y;
+	spr->transform.x = spr->inv_det *
+		(game->ray->dir.y * spr->x - game->ray->dir.x * spr->y);
+	spr->transform.y = spr->inv_det *
+		(-game->ray->plane_y * spr->x + game->ray->plane_x * spr->y);
+	spr->screen_x = (int)((config->width / 2) *
+		(1 + spr->transform.x / spr->transform.y));
+	spr->height = (int)(((config->width / 2) / tan(32 * (M_PI / 180)))
+		/ (spr->transform.y));
+	spr->draw_start_y = -spr->height / 2 + config->height / 2;
+	spr->draw_start_y = spr->draw_start_y < 0 ? 0 : spr->draw_start_y;
+	spr->draw_end_y = spr->height / 2 + config->height / 2;
+	if (spr->draw_end_y >= config->height)
+		spr->draw_end_y = config->height;
+	ft_sprite_width(config, spr, game);
+	spr->draw_start_x = -spr->width / 2 + spr->screen_x;
+	spr->draw_start_x = spr->draw_start_x < 0 ? 0 : spr->draw_start_x;
+	spr->draw_end_x = spr->width / 2 + spr->screen_x;
+	if (spr->draw_end_x >= config->width)
+		spr->draw_end_x = config->width;
+}
+
+void	ft_sprite_tex(t_sprite *spr, t_game *game, t_texture *tex)
 {
 	int stripe;
 	int y;
 
-	stripe = s_data->drawStart_x;
-	while (stripe < game->config->width && stripe < s_data->drawEnd_x)
+	stripe = spr->draw_start_x;
+	while (stripe < game->config->width && stripe < spr->draw_end_x)
 	{
-		s_data->tex_x = (int)((256 * (stripe - (-s_data->s_width / 2 + s_data->screen_x)) * game->tex[4].width / s_data->s_width) / 256);
-		y = s_data->drawStart_y;
-		while (y < s_data->drawEnd_y && s_data->transformY > 0. && s_data->transformY < game->ray->zbuffer[stripe])
+		spr->tex_x = (int)((256 * (stripe - (-spr->width / 2 + spr->screen_x))
+			* tex->width / spr->width) / 256);
+		y = spr->draw_start_y;
+		while (y < spr->draw_end_y && spr->transform.y > 0.
+			&& spr->transform.y < game->ray->zbuffer[stripe])
 		{
-
-			s_data->d = y * 256 - game->config->height * 128 + s_data->s_height * 128;
-			s_data->tex_y = ((s_data->d * game->tex[4].height) / s_data->s_height) / 256;
-			s_data->color = *(unsigned int *)(game->tex[4].img + (s_data->tex_y * game->tex[4].size_line + s_data->tex_x * (game->tex[4].bpp / 8)));			
-			if (s_data->color != 0)
-				my_mlx_pixel_put(game->mlx, y, stripe, s_data->color);
+			spr->d = y * 256 - game->config->height * 128 + spr->height * 128;
+			spr->tex_y = ((spr->d * tex->height) / spr->height) / 256;
+			spr->color = *(unsigned int *)(tex->img + (spr->tex_y
+				* tex->size_line + spr->tex_x * (tex->bpp / 8)));
+			if (spr->color != 0)
+				my_mlx_pixel_put(game->mlx, y, stripe, spr->color);
 			y++;
 		}
 		stripe++;
 	}
 }
 
-void	ft_sprite_management(t_game *game, t_config *config)
+void	ft_sprite_management(t_game *game, t_sprite *spr, t_config *config)
 {
-	int 			i;
+	int	i;
 
 	ft_sort_sprites(game, config->nb_sprite);
+	spr->ratio = (double)game->tex[4].height / (double)game->tex[4].width;
+	spr->inv_det = 1.0 / (game->ray->plane_x * game->ray->dir.y
+		- game->ray->dir.x * game->ray->plane_y);
 	i = 0;
 	while (i < config->nb_sprite)
 	{
-		if (game->sprite->pos[i].dist > .1)
+		if (spr->s_pos[i].dist > .2)
 		{
-			ft_draw_sprite(config, game->sprite, game->sprite->pos[i], game);
-			ft_sprite_tex(game->sprite, game);
+			ft_draw_sprite(config, spr, spr->s_pos[i], game);
+			ft_sprite_tex(spr, game, &game->tex[4]);
 		}
 		i++;
 	}

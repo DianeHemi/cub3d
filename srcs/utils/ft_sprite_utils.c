@@ -12,20 +12,20 @@
 
 #include "../../includes/cub3d.h"
 
-void 	ft_swap_sprites(t_sprite *sprite1, t_sprite *sprite2)
+void 	ft_swap_sprites(t_s_pos *sprite1, t_s_pos *sprite2)
 {
-	t_sprite tmp;
+	t_s_pos tmp;
 
 	tmp = *sprite1;
 	*sprite1 = *sprite2;
 	*sprite2 = tmp;
 }
 
-double		ft_sprite_dist(t_ray *ray, t_sprite *sprite)
+double		ft_sprite_dist(t_ray *ray, t_s_pos *sprite)
 {
 
-	sprite->dist = ((ray->pos_x - sprite->x) * (ray->pos_x - sprite->x) 
-			+ (ray->pos_y - sprite->y) * (ray->pos_y - sprite->y));
+	sprite->dist = ((ray->pos.x - sprite->x) * (ray->pos.x - sprite->x) 
+			+ (ray->pos.y - sprite->y) * (ray->pos.y - sprite->y));
 	return (sprite->dist);
 }
 
@@ -38,9 +38,10 @@ void		ft_sort_sprites(t_game *game, int nb_sprite)
 	while (i < nb_sprite)
 	{
 		j = i;
-		while (j > 0 && ft_sprite_dist(game->ray, &game->sprite->pos[j - 1]) < ft_sprite_dist(game->ray, &game->sprite->pos[j]))
+		while (j > 0 && ft_sprite_dist(game->ray, &game->sprite->s_pos[j - 1]) 
+				< ft_sprite_dist(game->ray, &game->sprite->s_pos[j]))
 		{
-			ft_swap_sprites(&game->sprite->pos[j], &game->sprite->pos[j - 1]);
+			ft_swap_sprites(&game->sprite->s_pos[j], &game->sprite->s_pos[j - 1]);
 			j--;
 		}
 		i++;

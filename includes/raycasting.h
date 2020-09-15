@@ -15,8 +15,6 @@
 
 # include <math.h>
 
-
-
 /*
 ** MACROS
 */
@@ -39,12 +37,10 @@
 #  define BACKWD 	115
 #  define LEFT 		97
 #  define RIGHT 	100
-#  define TURN_L 	68
-#  define TURN_R 	67
+#  define TURN_L 	65363
+#  define TURN_R 	65361
 #  endif
 # endif
-
-
 
 # ifdef __APPLE__
 #  define FORWD 	13
@@ -57,14 +53,10 @@
 #  define EXIT_BTN	17
 #  endif
 
-
-
-
-
 /*
 *** Stru1cture de la mlx
 */
-typedef struct s_mlx
+typedef struct	s_mlx
 {
 	void	*ptr;
 	void	*win;
@@ -72,79 +64,73 @@ typedef struct s_mlx
 	char	*img_ptr;
 	int		bpp;
 	int		size_line;
-	int		endian;	
-}			t_mlx;
+	int		endian;
+}				t_mlx;
+
+typedef struct	s_pos
+{
+	double		x;
+	double		y;
+}				t_pos;
 
 /*
 *** Structure du raycast
 */
-typedef struct s_ray
+typedef struct	s_ray
 {
-	//player position
-	double	pos_x;
-	double	pos_y;
-	//player direction
-	double	dir_x;
-	double	dir_y;
-	//camera plane
+	t_pos 	pos;
+	t_pos 	dir;
+	t_pos 	ray_dir;
+	double	cam_x;
+
 	double	plane_x;
 	double	plane_y; //fov
-	//rayon
-	double	rayDir_x;
-	double	rayDir_y;
-	double	cam_x;
 	//carre dans lequel se trouve le rayon actuellement
-	int		mapX;
-	int		mapY;
+	int		map_x;
+	int		map_y;
 	//Distance que le rayon doit parcourir depuis sa position de start
 	//jusqu'à premier x-side & premier y-side
-	double	sideDist_x;
-	double	sideDist_y;
-	//Distance que rayon parcourt d'un x-side au suivant ou y-side au suivant
-	double	deltaDist_x;
-	double	deltaDist_y;
-	//calculer longueur du rayon
-	double	perpWallDist;
+	t_pos 	side_dist;
+	t_pos 	delta_dist;
+	double	wall_dist;
 	//Direction vers laquelle aller
-	int		stepX;
-	int		stepY;
+	int		step_x;
+	int		step_y;
 	//Mur touche ? Orientation
 	int		hit;
 	int		side;
 	//Direction du mur & donc sa couleur atm
-	int		wallDir;
+	int		wall_dir;
 	//Where the wall is hit
-	double	wallX;
+	double	wall_x;
 	//Buffer pour sprites
 	double	*zbuffer;
-}			t_ray;
-
+}				t_ray;
 
 /*
 *** Structure du drawer
 */
-typedef struct s_draw
+typedef struct	s_draw
 {
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 
 	int		color;
-	int 	x;
-	int 	y;
+	int		x;
+	int		y;
 
-	int 	dist;
-	int 	side;
+	int		dist;
+	int		side;
 
 	double	step;
 	double	tex_pos;
-}			t_draw;
-
+}				t_draw;
 
 /*
 *** Structure des textures
 */
-typedef struct s_texture
+typedef struct	s_texture
 {
 	void	*ptr;
 	char	*img;
@@ -157,116 +143,93 @@ typedef struct s_texture
 
 	int		tex_x;
 	int		tex_y;
-}			t_texture;
-
-
+}				t_texture;
 
 /*
 *** Structure des sprites
 */
-typedef struct s_sprite
+typedef struct	s_s_pos
 {
 	double		x;
 	double		y;
 	double 		dist;
-}			t_sprite;
+}				t_s_pos;
 
-typedef struct s_sprite_data
+typedef struct	s_sprite
 {
+	t_s_pos 	*s_pos;
 	double 		x;
 	double 		y;
-	int 		d;
-
-	t_sprite 	*pos;
+	int			d;
 
 	double 		ratio;
 
-	double 		invDet;
+	double 		inv_det;
 	double 		dist;
+	t_pos 		transform;
+	int			screen_x;
 
-	double 		transformX;
-	double 		transformY;
-	int 		screen_x;
+	int			height;
+	int			draw_start_y;
+	int			draw_end_y;
+	int			width;
+	int			draw_start_x;
+	int			draw_end_x;
 
-
-	int 		s_height;
-	int 		drawStart_y;
-	int 		drawEnd_y;
-
-	int 		s_width;
-	int 		drawStart_x;
-	int 		drawEnd_x;
-
-	int 		tex_x;
-	int 		tex_y;
-	int 		color;
-}			t_sprite_data;
-
-
+	int			tex_x;
+	int			tex_y;
+	int			color;
+}				t_sprite;
 
 /*
 *** Structure deplacements
 */
-typedef struct s_move
+typedef struct	s_move
 {
-	int		forwd;
-	int		backwd;
-	int		left;
-	int		right;
-	int 	turn_l;
-	int 	turn_r;
-
-	//Deplacements
-	double	mv_spd;
-	double	rota_spd;
-}			t_move;
-
-
+	int			forwd;
+	int			backwd;
+	int			left;
+	int			right;
+	int			turn_l;
+	int			turn_r;
+	double		mv_spd;
+	double		rota_spd;
+}				t_move;
 
 /*
 *** Structure globale du jeu
 */
-typedef struct s_game
+typedef struct	s_game
 {
 	t_config	*config;
 	t_mlx		*mlx;
 	t_ray		*ray;
 	t_texture	*tex;
-	t_sprite_data	*sprite;
+	t_sprite	*sprite;
 	t_move		*move;
-}			t_game;
-
-
-
-
-
+}				t_game;
 
 /*
-*** Stru1cture de la mlx
+*** Stru1cture sauvegarde
 */
-typedef struct s_save
+typedef struct	s_save
 {
-	int 		file_size;
-	int 		reserved;
+	int			file_size;
+	int			reserved;
 	int			offset;
-	int 		header_size;
-	short int 	planes;
-	short int 	bpixels;
-	int 		fd;
+	int			header_size;
+	short int	planes;
+	short int	bpixels;
+	int			fd;
 
-}			t_save;
-
-
-
-
-
+}				t_save;
 
 /*
 *** Fonctions
 */
-int 	ft_launch_mlx(t_mlx *mlx, t_config *data);
-int 	ft_launch_prog(t_config *config, t_mlx *mlx, int save_opt);
-int 	ft_main_loop(t_game *game);
+int		ft_launch_mlx(t_mlx *mlx, t_config *config);
+int		ft_launch_prog(t_config *config, t_mlx *mlx, int save_opt);
+int		ft_main_loop(t_game *game);
 
 /*
 *** Raycasting
@@ -280,9 +243,11 @@ void	ft_get_wall_dist(t_ray *ray, int x);
 /*
 *** Drawing
 */
-void	ft_init_drawing(t_ray *ray, t_config *config, t_draw *draw, int t_height);
+void	ft_init_drawing(t_ray *ray, t_config *config,
+		t_draw *draw, int tex_height);
 void	ft_get_tex_coords(t_ray *ray, t_game *game);
 void	ft_draw_colors(t_game *game, t_draw *draw);
+void	ft_sprite_management(t_game *game, t_sprite *spr, t_config *config);
 
 /*
 *** Key events
@@ -290,14 +255,7 @@ void	ft_draw_colors(t_game *game, t_draw *draw);
 int		ft_keypress(int keycode, t_game *game);
 int		ft_keyrelease(int keycode, t_game *game);
 void	ft_move_player(t_move *move, t_ray *ray, t_config *config);
-
-int 	ft_exit(t_game *game);
+int		ft_exit(t_game *game);
 void	ft_save(t_game *game);
-
-/*
-*** Sprites
-*/
-void	ft_sprite_management(t_game *game, t_config *config);
-
 
 #endif

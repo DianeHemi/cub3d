@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-int ft_check_extension(char *str)
+int	ft_check_extension(char *str)
 {
 	int i;
 
@@ -22,7 +22,7 @@ int ft_check_extension(char *str)
 	if (str[i - 1] != 'b' && str[i - 2] != 'u' && str[i - 3] != 'c'
 		&& str[i - 4] != '.')
 		return (0);
-	else 
+	else
 		return (1);
 }
 
@@ -32,7 +32,7 @@ int	ft_check_args(int argc, char **argv, int *save_opt)
 		return (ft_errors("Wrong format : ./exec map.cub (--save)\n"));
 	if (argc == 3)
 	{
-		if (ft_strcmp(argv[2], "--save") != 0 
+		if (ft_strcmp(argv[2], "--save") != 0
 			|| !ft_check_extension(argv[1]))
 			return (ft_errors("Error : invalid arguments\n"));
 		else
@@ -76,6 +76,5 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!ft_launch_prog(&config, &mlx, save_opt))
 		return (EXIT_FAILURE);
-
 	return (0);
 }

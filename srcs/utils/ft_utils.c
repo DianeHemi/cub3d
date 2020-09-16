@@ -20,7 +20,7 @@ void	my_mlx_pixel_put(t_mlx *mlx, int y, int x, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	ft_errors(char *str)
+int		ft_errors(char *str)
 {
 	int i;
 
@@ -38,7 +38,7 @@ int		ft_store_struct(t_config *data, t_ray *ray, t_mlx *mlx, t_game *game)
 	game->mlx = mlx;
 	game->config = data;
 	game->ray = ray;
-	if(!(game->ray->zbuffer = malloc(sizeof(double) * game->config->width)))
+	if (!(game->ray->zbuffer = malloc(sizeof(double) * game->config->width)))
 		return (ft_errors("Memory allocation failed.\n"));
 	return (1);
 }

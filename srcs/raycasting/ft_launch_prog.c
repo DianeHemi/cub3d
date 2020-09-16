@@ -16,8 +16,8 @@ int	ft_init_image(t_config *config, t_mlx *mlx)
 {
 	if (!(mlx->img = mlx_new_image(mlx->ptr, config->width, config->height)))
 		return (0);
-	mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp, 
-		&mlx->size_line, &mlx->endian);
+	mlx->img_ptr = mlx_get_data_addr(mlx->img, &mlx->bpp,
+			&mlx->size_line, &mlx->endian);
 	if (mlx->img_ptr == NULL)
 		return (0);
 	mlx->bpp = mlx->bpp / 8;
@@ -46,7 +46,8 @@ int	ft_launch_mlx(t_mlx *mlx, t_config *config)
 		return (ft_errors("Initialisation failed.\n"));
 	if (!ft_adjust_resolution(mlx, config))
 		return (ft_errors("An error occured while resizing the window.\n"));
-	if (!(mlx->win = mlx_new_window(mlx->ptr, config->width, config->height, "Cub3D")))
+	if (!(mlx->win = mlx_new_window(mlx->ptr, config->width,
+			config->height, "Cub3D")))
 		return (ft_errors("Window couldn't be initialised.\n"));
 	if (!(ft_init_image(config, mlx)))
 		return (ft_errors("Image initialisation failed.\n"));
@@ -58,7 +59,8 @@ int	ft_main_loop(t_game *game)
 	ft_raycasting(game);
 	ft_sprite_management(game, game->sprite, game->config);
 	ft_move_player(game->move, game->ray, game->config);
-	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win, game->mlx->img, 0, 0);
+	mlx_put_image_to_window(game->mlx->ptr, game->mlx->win,
+			game->mlx->img, 0, 0);
 	mlx_do_sync(game->mlx->ptr);
 	return (1);
 }
@@ -66,7 +68,7 @@ int	ft_main_loop(t_game *game)
 int	ft_launch_prog(t_config *config, t_mlx *mlx, int save_opt)
 {
 	t_game		game;
-	t_ray 		ray;
+	t_ray		ray;
 	t_texture	tex[5];
 	t_sprite	sprite;
 	t_move		move;
@@ -83,10 +85,9 @@ int	ft_launch_prog(t_config *config, t_mlx *mlx, int save_opt)
 	ft_init_player_pos(game.config, game.ray);
 	if (save_opt == 1)
 		ft_save(&game);
-
-	mlx_hook(mlx->win, 2, 1L<<0, ft_keypress, &game);
-	mlx_hook(mlx->win, 3, 1L<<1, ft_keyrelease, &game);
-	mlx_hook(mlx->win, EXIT_BTN, 1L<<17, ft_exit, &game);
+	mlx_hook(mlx->win, 2, 1L << 0, ft_keypress, &game);
+	mlx_hook(mlx->win, 3, 1L << 1, ft_keyrelease, &game);
+	mlx_hook(mlx->win, EXIT_BTN, 1L << 17, ft_exit, &game);
 	mlx_loop_hook(mlx->ptr, ft_main_loop, &game);
 	mlx_loop(mlx->ptr);
 	return (1);

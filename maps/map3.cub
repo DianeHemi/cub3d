@@ -1,12 +1,12 @@
 R 640 500
-NO textures/BluegreyD.xpm
-WE textures/BluegreyswasD.xpm 
-SO textures/BluegreyeagleD.xpm
-EA textures/002-rooftiles8.xpm
+NO textures/020-brickgreen.xpm
+WE textures/020-brickgreybrown.xpm
+SO textures/021-brickgreybrownmould1.xpm
+EA textures/021-brickgreymould1.XPM
 
-S textures/W3d_finalarmor.XPM
-F 50,50,140
-C 0,0,50
+S textures/pillar.XPM
+F 50,50,30
+C 50,90,50
 
      11111111111111111111111111111
      10000000001100000000000000001

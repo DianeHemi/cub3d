@@ -61,6 +61,8 @@ void	ft_sprite_tex(t_sprite *spr, t_game *game, t_texture *tex)
 	{
 		spr->tex_x = (int)((256 * (stripe - (-spr->width / 2 + spr->screen_x))
 			* tex->width / spr->width) / 256);
+		if (spr->tex_x > game->config->width || spr->tex_x < 0)
+			break ;
 		y = spr->draw_start_y;
 		while (y < spr->draw_end_y && spr->transform.y > 0.
 			&& spr->transform.y < game->ray->zbuffer[stripe])
@@ -69,7 +71,7 @@ void	ft_sprite_tex(t_sprite *spr, t_game *game, t_texture *tex)
 			spr->tex_y = ((spr->d * tex->height) / spr->height) / 256;
 			spr->color = *(unsigned int *)(tex->img + (spr->tex_y
 				* tex->size_line + spr->tex_x * (tex->bpp / 8)));
-			if (spr->color != 0)
+			if (spr->color != 0x0)
 				my_mlx_pixel_put(game->mlx, y, stripe, spr->color);
 			y++;
 		}

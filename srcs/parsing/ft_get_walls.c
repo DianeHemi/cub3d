@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int ft_get_wall_north(t_config *config, char *line)
+int	ft_get_wall_north(t_config *config, char *line)
 {
 	int start;
 	int end;
@@ -31,7 +31,7 @@ int ft_get_wall_north(t_config *config, char *line)
 	return (1);
 }
 
-int ft_get_wall_south(t_config *config, char *line)
+int	ft_get_wall_south(t_config *config, char *line)
 {
 	int start;
 	int end;
@@ -50,7 +50,7 @@ int ft_get_wall_south(t_config *config, char *line)
 	return (1);
 }
 
-int ft_get_wall_east(t_config *config, char *line)
+int	ft_get_wall_east(t_config *config, char *line)
 {
 	int start;
 	int end;
@@ -69,7 +69,7 @@ int ft_get_wall_east(t_config *config, char *line)
 	return (1);
 }
 
-int ft_get_wall_west(t_config *config, char *line)
+int	ft_get_wall_west(t_config *config, char *line)
 {
 	int start;
 	int end;

@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int ft_check_top_bot(t_config *config)
+int	ft_check_top_bot(t_config *config)
 {
 	int y;
 	int x;
@@ -38,7 +38,7 @@ int ft_check_top_bot(t_config *config)
 	return (1);
 }
 
-int ft_check_sides(t_config *config)
+int	ft_check_sides(t_config *config)
 {
 	int y;
 	int first;
@@ -53,6 +53,8 @@ int ft_check_sides(t_config *config)
 		last = ft_strlen(config->map[y]) - 1;
 		while (last > 0 && !ft_strchr("012NSEW", config->map[y][last]))
 			last--;
+		if (first >= last)
+			return (1);
 		if (config->map[y][first] != '1' || config->map[y][last] != '1')
 			return (0);
 		y++;
@@ -60,7 +62,7 @@ int ft_check_sides(t_config *config)
 	return (1);
 }
 
-int ft_check_middle(t_config *config) 
+int	ft_check_middle(t_config *config)
 {
 	int y;
 	int x;
@@ -81,7 +83,7 @@ int ft_check_middle(t_config *config)
 		}
 		y++;
 	}
-	return(1);
+	return (1);
 }
 
 int	ft_check_map(t_config *config)

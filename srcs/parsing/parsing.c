@@ -35,7 +35,7 @@ int	ft_get_config(t_config *config, char *line)
 		return (0);
 }
 
-int		ft_get_map(int fd, char *line, t_config *config)
+int	ft_get_map(int fd, char *line, t_config *config)
 {
 	int		read;
 	char	*map_tmp;
@@ -48,8 +48,11 @@ int		ft_get_map(int fd, char *line, t_config *config)
 		tmp = map_tmp;
 		map_tmp = ft_strjoin(map_tmp, line);
 		free(tmp);
-		free(line);	
+		free(line);
 	}
+	tmp = map_tmp;
+	map_tmp = ft_strjoin(map_tmp, line);
+	free(tmp);
 	free(line);
 	config->map = ft_split(map_tmp, '\n');
 	free(map_tmp);
@@ -57,7 +60,7 @@ int		ft_get_map(int fd, char *line, t_config *config)
 	return (1);
 }
 
-int		ft_is_map(char *line)
+int	ft_is_map(char *line)
 {
 	int i;
 
@@ -79,9 +82,9 @@ int		ft_is_map(char *line)
 
 int	ft_parsing(char *map, t_config *config)
 {
-	int		fd;	
+	int		fd;
 	int		read;
-	char 	*line;
+	char	*line;
 
 	read = 0;
 	if ((fd = open(map, O_RDONLY)) < 0)

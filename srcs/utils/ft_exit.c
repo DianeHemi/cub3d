@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-void		ft_free_tab(char **str)
+void	ft_free_tab(char **str)
 {
 	int i;
 
@@ -25,7 +25,7 @@ void		ft_free_tab(char **str)
 	free(str);
 }
 
-void 		ft_free_tex(t_config *config)
+void	ft_free_tex(t_config *config)
 {
 	free(config->north_tex);
 	free(config->south_tex);
@@ -34,11 +34,12 @@ void 		ft_free_tex(t_config *config)
 	free(config->sprite_tex);
 }
 
-static void	ft_destroy_imgs(t_game *game)
+int		ft_exit(t_game *game)
 {
 	int i;
 
 	i = 0;
+	ft_free_tab(game->config->map);
 	if (game->mlx->ptr && game->mlx->img)
 	{
 		mlx_destroy_image(game->mlx->ptr, game->mlx->img);
@@ -56,26 +57,7 @@ static void	ft_destroy_imgs(t_game *game)
 		mlx_clear_window(game->mlx->ptr, game->mlx->win);
 		mlx_destroy_window(game->mlx->ptr, game->mlx->win);
 	}
-}
-
-
-
-int 		ft_exit(t_game *game)
-{
-	//struct s_xvar	*xvar;
-
-	ft_free_tab(game->config->map);
-	ft_destroy_imgs(game);
-
-/*
-	xvar = game->mlx->ptr;
-	if (xvar->private_cmap)
-		XFreeColormap(xvar->display, (Colormap)xvar->private_cmap);
-	XCloseDisplay(xvar->display);
-
-	free(xvar);*/
-
-	
+	free(game->mlx->ptr);
 	exit(EXIT_SUCCESS);
 	return (1);
 }

@@ -28,7 +28,7 @@ int	ft_get_resolution(t_config *config, char *line)
 	return (1);
 }
 
-int ft_get_player_pos(t_config *config, int y, int x)
+int	ft_get_player_pos(t_config *config, int y, int x)
 {
 	if (config->player_start == '0')
 	{

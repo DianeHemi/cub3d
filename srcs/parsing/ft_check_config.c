@@ -43,7 +43,7 @@ int	ft_check_config(t_config *config)
 		return (ft_errors("Cannot open textures.\n"));
 	if (!ft_check_map(config))
 		return (ft_errors("Map is incorrect.\n"));
-	if (config->player_start == '0')	
+	if (config->player_start == '0')
 		return (ft_errors("Player is missing.\n"));
 	return (1);
 }

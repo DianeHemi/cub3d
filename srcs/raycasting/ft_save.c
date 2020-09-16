@@ -12,10 +12,10 @@
 
 #include "../../includes/cub3d.h"
 
-char 	*ft_find_filename(char *str, int i)
+char	*ft_find_filename(char *str, int i)
 {
 	char	*start;
-	char 	*nb;
+	char	*nb;
 	char	*new_str;
 
 	start = "bmp/save";
@@ -30,7 +30,7 @@ char 	*ft_find_filename(char *str, int i)
 
 void	ft_init_struct_save(t_save *save, t_config *config)
 {
-	char 	*filename;
+	char	*filename;
 	int		i;
 
 	i = 0;

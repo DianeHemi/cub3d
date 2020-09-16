@@ -14,9 +14,6 @@
 # define UTILS_H
 
 # include "raycasting.h"
-#include <X11/Xlib.h>
-#include "mlx_int.h"
-
 
 /*
 *** Fonctions relatives a exit

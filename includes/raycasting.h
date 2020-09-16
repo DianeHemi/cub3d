@@ -193,7 +193,7 @@ typedef struct	s_move
 	int			turn_l;
 	int			turn_r;
 	double		mv_spd;
-	double		rota_spd;
+	double		rot_spd;
 }				t_move;
 
 /*

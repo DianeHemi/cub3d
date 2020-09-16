@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-int ft_rgb_conv(int nb[3], int i)
+int	ft_rgb_conv(int nb[3], int i)
 {
 	if (nb[0] > 255 || nb[1] > 255 || nb[2] > 255)
 		return (-1);
@@ -23,7 +23,7 @@ int ft_rgb_conv(int nb[3], int i)
 	return (nb[i]);
 }
 
-int ft_check_nb(char *str)
+int	ft_check_nb(char *str)
 {
 	int i;
 
@@ -39,11 +39,11 @@ int ft_check_nb(char *str)
 	return (1);
 }
 
-int ft_rgb_to_int(char *line)
+int	ft_rgb_to_int(char *line)
 {
-	int 	nb[4];
+	int		nb[4];
 	char	**color;
-	int 	i;
+	int		i;
 
 	i = 0;
 	while (line[i] == ' ')

@@ -64,7 +64,7 @@ void	ft_move_rotte(t_move *mv, t_ray *r)
 		r->plane_y = old_plane_x * sin(-mv->rot_spd) + r->plane_y
 			* cos(-mv->rot_spd);
 	}
-	if (move->turn_l == 1)
+	if (mv->turn_l == 1)
 	{
 		old_dir_x = r->dir.x;
 		r->dir.x = r->dir.x * cos(mv->rot_spd) - r->dir.y * sin(mv->rot_spd);

@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 11:43:41 by dchampda          #+#    #+#             */
-/*   Updated: 2020/06/24 11:43:43 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/09/17 16:29:19 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	ft_check_sides(t_config *config)
 		while (!ft_strchr("012NSEW", config->map[y][first]))
 			first++;
 		last = ft_strlen(config->map[y]) - 1;
+		if (last == 0)
+			return (0);
 		while (last > 0 && !ft_strchr("012NSEW", config->map[y][last]))
 			last--;
 		if (first >= last)

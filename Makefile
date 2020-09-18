@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	Cub3D
+NAME	=	cub3D
 
 # --------- Gestion systeme --------- #
 UNAME := $(shell uname)
@@ -62,7 +62,6 @@ SRCS 	+= 	./srcs/utils/ft_init.c \
 			./srcs/utils/ft_sprite_utils.c \
 			./srcs/utils/ft_init_texture_sprite.c
 
-
 # --------- INC --------- #
 
 INCLUDES	= ./includes/
@@ -74,11 +73,12 @@ LIBPATH		= ./libft
 # --------- OBJS --------- #
 
 OBJS		= $(SRCS:.c=.o)
-#OBJSBONUS	= ${BONUS:.c=.o}
 
 
 
+# -------------------------- #
 # --------- Compil --------- #
+# -------------------------- #
 
 all: $(NAME)
 
@@ -89,10 +89,6 @@ $(NAME): $(LIB) $(OBJS)
 	$(MAKE) -C $(LIBPATH)
 	$(MAKE) -C $(MLX_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@ $(MLX) -L$(LIBPATH) -lft
-
-	
-
-#bonus: ${OBJS} ${OBJSBONUS}
 
 clean:
 	$(MAKE) clean -C $(MLX_DIR)
@@ -105,9 +101,4 @@ fclean: clean
 re: fclean
 	$(MAKE)
 
-#cleanbmp:
-#	rm bmp_saved/Cub3D_*
-
-
-
-.PHONY : all clean fclean re mlxcomp cleanbmp
+.PHONY : all clean fclean re

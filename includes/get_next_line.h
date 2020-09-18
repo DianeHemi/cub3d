@@ -15,7 +15,7 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
-#endif
+# endif
 
 int		get_next_line(int fd, char **line);
 int		find_n(char *buffer, char c);

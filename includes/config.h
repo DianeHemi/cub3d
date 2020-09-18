@@ -16,9 +16,9 @@
 # include "get_next_line.h"
 
 /*
- *** Structure pour les infos de la map 
+ *** Structure pour les infos de la map
 */
-typedef	struct s_config
+typedef	struct	s_config
 {
 	int			width;
 	int			height;
@@ -42,41 +42,33 @@ typedef	struct s_config
 
 }				t_config;
 
-
-
-
 /*
 *** Fonctions de parsing
 */
-int		ft_parsing(char *map, t_config *data);
+int				ft_parsing(char *map, t_config *data);
 
 /*
 *** Recuperation des donnees
 */
-int		ft_get_config(t_config *config, char *line);
-int		ft_get_colors(t_config *config, char *line);
-int		ft_get_resolution(t_config *config, char *line);
+int				ft_get_config(t_config *config, char *line);
+int				ft_get_colors(t_config *config, char *line);
+int				ft_get_resolution(t_config *config, char *line);
 
-int 	ft_get_wall_north(t_config *config, char *line);
-int 	ft_get_wall_south(t_config *config, char *line);
-int		ft_get_wall_east(t_config *config, char *line);
-int 	ft_get_wall_west(t_config *config, char *line);
-int		ft_get_sprite(t_config *config, char *line);
+int				ft_get_wall_north(t_config *config, char *line);
+int				ft_get_wall_south(t_config *config, char *line);
+int				ft_get_wall_east(t_config *config, char *line);
+int				ft_get_wall_west(t_config *config, char *line);
+int				ft_get_sprite(t_config *config, char *line);
 
-int		ft_get_map(int fd, char *line, t_config *config);
-int 	ft_get_player_pos(t_config *config, int y, int x);
+int				ft_get_map(int fd, char *line, t_config *config);
+int				ft_get_player_pos(t_config *config, int y, int x);
 
 /*
 *** Verification des donnees
 */
-int		ft_check_config(t_config *config);
-int		ft_check_map(t_config *config);
-int		ft_open_tex(t_config *config);
-
-/*
-*** Est-ce que la ligne contient une map ?
-*/
-int		ft_is_map(char *line);
-
+int				ft_check_config(t_config *config);
+int				ft_check_map(t_config *config);
+int				ft_open_tex(t_config *config);
+int				ft_is_map(char *line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dchampda <dchampda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/24 11:43:41 by dchampda          #+#    #+#             */
-/*   Updated: 2020/09/17 16:48:39 by dchampda         ###   ########.fr       */
+/*   Updated: 2020/06/24 11:43:43 by dchampda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,10 @@ int	ft_check_sides(t_config *config)
 		while (!ft_strchr("012NSEW", config->map[y][first]))
 			first++;
 		last = ft_strlen(config->map[y]) - 1;
-		if (last > 0)
-		{
-			while (last > 0 && !ft_strchr("012NSEW", config->map[y][last]))
-				last--;
-		}
+		while (last > 0 && !ft_strchr("012NSEW", config->map[y][last]))
+			last--;
 		if (first >= last)
 			return (1);
-		//Protection si 
-		//1
-		//1N1
-		//11
 		if (config->map[y][first] != '1' || config->map[y][last] != '1')
 			return (0);
 		y++;
@@ -81,10 +74,14 @@ int	ft_check_middle(t_config *config)
 		while (config->map[y][x])
 		{
 			if ((config->map[y][x] == '0' && config->map[y + 1][x] == ' ')
-				|| (config->map[y][x] == '0' && config->map[y - 1][x] == ' '))
+				|| (config->map[y][x] == '0' && config->map[y - 1][x] == ' ')
+				|| (config->map[y][x] == '0' && !config->map[y + 1][x])
+				|| (config->map[y][x] == '0' && !config->map[y - 1][x]))
 				return (0);
 			else if ((config->map[y][x] == '0' && config->map[y][x + 1] == ' ')
-				|| (config->map[y][x] == '0' && config->map[y][x - 1] == ' '))
+				|| (config->map[y][x] == '0' && config->map[y][x - 1] == ' ')
+				|| (config->map[y][x] == '0' && !config->map[y][x + 1])
+				|| (config->map[y][x] == '0' && !config->map[y][x - 1]))
 				return (0);
 			x++;
 		}

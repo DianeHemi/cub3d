@@ -1,0 +1,17 @@
+R 1920 1080
+NO textures/greystone.XPM
+SO textures/010-brownstone.xpm
+WE textures/mossy.XPM 
+EA textures/010-fawnstone.xpm
+
+S textures/pillar.XPM
+F 50,50,140
+C 100,0,50
+
+
+
+111111
+100101
+102001
+1100N1
+111111

@@ -88,13 +88,13 @@ int	ft_parsing(char *map, t_config *config)
 
 	read = 0;
 	if ((fd = open(map, O_RDONLY)) < 0)
-		return (ft_errors("Error: cannot open map file.\n"));
+		return (ft_errors("Error\nCannot open map file.\n"));
 	while ((read = get_next_line(fd, &line)) != 0 && !ft_is_map(line))
 	{
 		if (!ft_get_config(config, line))
 		{
 			free(line);
-			return (ft_errors("Error : Configuration is invalid.\n"));
+			return (ft_errors("Error\nConfiguration is invalid.\n"));
 		}
 		free(line);
 	}
@@ -104,6 +104,6 @@ int	ft_parsing(char *map, t_config *config)
 		free(line);
 	close(fd);
 	if (read != 1)
-		return (ft_errors("Error : Map is missing.\n"));
+		return (ft_errors("Error\nMap is missing.\n"));
 	return (1);
 }

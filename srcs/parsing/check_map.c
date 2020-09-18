@@ -102,7 +102,7 @@ int	ft_check_map(t_config *config)
 		while (config->map[y][x])
 		{
 			if (!ft_strchr(" 012NSEW", config->map[y][x]))
-				return (ft_errors("Invalid character in map.\n"));
+				return (ft_errors("Error\nInvalid character in map.\n"));
 			if (ft_strchr("NSEW", config->map[y][x]))
 			{
 				if (!ft_get_player_pos(config, y, x))
@@ -114,6 +114,6 @@ int	ft_check_map(t_config *config)
 	}
 	if (!ft_check_top_bot(config) || !ft_check_sides(config)
 		|| !ft_check_middle(config))
-		return (ft_errors("Map is not closed.\n"));
+		return (ft_errors("Error\nMap is not closed.\n"));
 	return (1);
 }

@@ -32,18 +32,18 @@ int	ft_open_tex(t_config *config)
 int	ft_check_config(t_config *config)
 {
 	if (config->width <= 0 || config->height <= 0)
-		return (ft_errors("Resolution incorrect.\n"));
+		return (ft_errors("Error\nResolution incorrect.\n"));
 	if (config->f_color < 0 || config->c_color < 0)
-		return (ft_errors("Floor or ceiling color is incorrect.\n"));
+		return (ft_errors("Error\nFloor or ceiling color is incorrect.\n"));
 	if (config->north_tex == NULL || config->south_tex == NULL
 		|| config->east_tex == NULL || config->west_tex == NULL
 		|| config->sprite_tex == NULL)
-		return (ft_errors("Textures are missing.\n"));
+		return (ft_errors("Error\nTextures are missing.\n"));
 	if (!ft_open_tex(config))
-		return (ft_errors("Cannot open textures.\n"));
+		return (ft_errors("Error\nCannot open textures.\n"));
 	if (!ft_check_map(config))
-		return (ft_errors("Map is incorrect.\n"));
+		return (0);
 	if (config->player_start == '0')
-		return (ft_errors("Player is missing.\n"));
+		return (ft_errors("Error\nPlayer is missing.\n"));
 	return (1);
 }

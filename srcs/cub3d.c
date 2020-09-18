@@ -19,8 +19,9 @@ int	ft_check_extension(char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (str[i - 1] != 'b' && str[i - 2] != 'u' && str[i - 3] != 'c'
-		&& str[i - 4] != '.')
+	i--;
+	if (str[i] != 'b' || str[i - 1] != 'u' || str[i - 2] != 'c'
+		|| str[i - 3] != '.')
 		return (0);
 	else
 		return (1);
@@ -29,12 +30,12 @@ int	ft_check_extension(char *str)
 int	ft_check_args(int argc, char **argv, int *save_opt)
 {
 	if (argc < 2 || argc > 3)
-		return (ft_errors("Wrong format : ./exec map.cub (--save)\n"));
+		return (ft_errors("Error\nWrong format : ./exec map.cub (--save)\n"));
 	if (argc == 3)
 	{
 		if (ft_strcmp(argv[2], "--save") != 0
 			|| !ft_check_extension(argv[1]))
-			return (ft_errors("Error : invalid arguments\n"));
+			return (ft_errors("Error\nInvalid arguments\n"));
 		else
 		{
 			*save_opt = 1;
@@ -44,7 +45,7 @@ int	ft_check_args(int argc, char **argv, int *save_opt)
 	else
 	{
 		if (!ft_check_extension(argv[1]))
-			return (ft_errors("Invalid format : Select a .cub map\n"));
+			return (ft_errors("Error\nInvalid format : Select a .cub map\n"));
 		else
 			return (1);
 	}
@@ -69,7 +70,7 @@ int	main(int argc, char **argv)
 	{
 		ft_free_tab(config.map);
 		ft_free_tex(&config);
-		ft_putstr_fd("Error : Configuration is invalid.\n", 2);
+		ft_putstr_fd("Error\nConfiguration is invalid.\n", 2);
 		return (EXIT_FAILURE);
 	}
 	if (!ft_launch_mlx(&mlx, &config))

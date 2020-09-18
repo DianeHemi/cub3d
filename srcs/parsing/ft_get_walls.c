@@ -19,7 +19,7 @@ int	ft_get_wall_north(t_config *config, char *line)
 
 	start = 0;
 	if (config->north_tex != NULL)
-		return (ft_errors("Duplicate north wall texture declared.\n"));
+		return (ft_errors("Error\nDuplicate north wall texture declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
 	end = start;
@@ -38,7 +38,7 @@ int	ft_get_wall_south(t_config *config, char *line)
 
 	start = 0;
 	if (config->south_tex != NULL)
-		return (ft_errors("Duplicate south wall texture declared.\n"));
+		return (ft_errors("Error\nDuplicate south wall texture declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
 	end = start;
@@ -57,7 +57,7 @@ int	ft_get_wall_east(t_config *config, char *line)
 
 	start = 0;
 	if (config->east_tex != NULL)
-		return (ft_errors("Duplicate east wall texture declared.\n"));
+		return (ft_errors("Error\nDuplicate east wall texture declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
 	end = start;
@@ -76,7 +76,7 @@ int	ft_get_wall_west(t_config *config, char *line)
 
 	start = 0;
 	if (config->west_tex != NULL)
-		return (ft_errors("Duplicate west wall texture declared.\n"));
+		return (ft_errors("Error\nDuplicate west wall texture declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
 	end = start;

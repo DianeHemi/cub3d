@@ -74,8 +74,8 @@ int	ft_get_colors(t_config *config, char *line)
 	else if (line[0] == 'C' && config->c_color == -2)
 		config->c_color = ft_rgb_to_int(&line[1]);
 	else
-		return (ft_errors("Duplicate colors data.\n"));
+		return (ft_errors("Error\nDuplicate colors data.\n"));
 	if (config->f_color == -1 || config->c_color == -1)
-		return (ft_errors("Wrong color format, it must be 'R,G,B'.\n"));
+		return (ft_errors("Error\nWrong color format, it must be 'R,G,B'.\n"));
 	return (1);
 }

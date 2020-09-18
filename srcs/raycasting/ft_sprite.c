@@ -71,7 +71,7 @@ void	ft_sprite_tex(t_sprite *spr, t_game *game, t_texture *tex)
 			spr->tex_y = ((spr->d * tex->height) / spr->height) / 256;
 			spr->color = *(unsigned int *)(tex->img + (spr->tex_y
 				* tex->size_line + spr->tex_x * (tex->bpp / 8)));
-			if (spr->color != 0x0)
+			if ((spr->color & 0x00FFFFFF) != 0)
 				my_mlx_pixel_put(game->mlx, y, stripe, spr->color);
 			y++;
 		}

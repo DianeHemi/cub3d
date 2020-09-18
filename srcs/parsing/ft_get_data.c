@@ -18,7 +18,7 @@ int	ft_get_resolution(t_config *config, char *line)
 
 	i = 0;
 	if (config->width != 0 || config->height != 0)
-		return (ft_errors("Duplicate resolution data.\n"));
+		return (ft_errors("Error\nDuplicate resolution data.\n"));
 	while (line[i] == ' ')
 		i++;
 	config->width = ft_atoi(&line[i]);
@@ -38,7 +38,7 @@ int	ft_get_player_pos(t_config *config, int y, int x)
 		config->map[y][x] = '0';
 	}
 	else
-		return (ft_errors("Only one camera allowed.\n"));
+		return (ft_errors("Error\nOnly one camera allowed.\n"));
 	return (1);
 }
 
@@ -49,7 +49,7 @@ int	ft_get_sprite(t_config *config, char *line)
 
 	start = 0;
 	if (config->sprite_tex != NULL)
-		return (ft_errors("Duplicate sprite declared.\n"));
+		return (ft_errors("Error\nDuplicate sprite declared.\n"));
 	while (line[start] == ' ' && line[start] != '\0')
 		start++;
 	end = start;

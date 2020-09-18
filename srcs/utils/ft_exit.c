@@ -40,6 +40,8 @@ int		ft_exit(t_game *game)
 
 	i = 0;
 	ft_free_tab(game->config->map);
+	free(game->sprite->s_pos);
+	free(game->ray->zbuffer);
 	if (game->mlx->ptr && game->mlx->img)
 	{
 		mlx_destroy_image(game->mlx->ptr, game->mlx->img);
@@ -50,14 +52,11 @@ int		ft_exit(t_game *game)
 			i++;
 		}
 	}
-	free(game->sprite->s_pos);
-	free(game->ray->zbuffer);
 	if (game->mlx->ptr && game->mlx->win)
 	{
 		mlx_clear_window(game->mlx->ptr, game->mlx->win);
 		mlx_destroy_window(game->mlx->ptr, game->mlx->win);
 	}
 	free(game->mlx->ptr);
-	exit(EXIT_SUCCESS);
-	return (1);
+	exit(0);
 }

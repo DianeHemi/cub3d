@@ -24,9 +24,9 @@
 #  define EXIT_BTN	33
 
 #  ifndef QWERTY
-#   define FORWD 	122
+#   define FORWD 	119
 #   define BACKWD 	115
-#   define LEFT 	113
+#   define LEFT 	97
 #   define RIGHT 	100
 #   define TURN_L 	65363
 #   define TURN_R 	65361

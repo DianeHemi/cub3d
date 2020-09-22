@@ -91,13 +91,11 @@ void	ft_save(t_game *game)
 {
 	t_save save;
 
-	if (!ft_main_loop(game))
-	{
-		ft_errors("Error\nGame could not be initialized.");
-		ft_exit(game);
-	}
+	ft_raycasting(game);
+	ft_sprite_management(game, game->sprite, game->config);
 	ft_init_struct_save(&save, game->config);
 	ft_write_bmp_header(&save, game->config);
 	ft_write_bmp_tex(&save, game->config, game->mlx);
 	close(save.fd);
+	ft_exit_save(game);
 }

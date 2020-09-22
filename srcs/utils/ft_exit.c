@@ -60,3 +60,25 @@ int		ft_exit(t_game *game)
 	free(game->mlx->ptr);
 	exit(0);
 }
+
+int		ft_exit_save(t_game *game)
+{
+	int i;
+
+	i = 0;
+	ft_free_tab(game->config->map);
+	free(game->sprite->s_pos);
+	free(game->ray->zbuffer);
+	if (game->mlx->ptr && game->mlx->img)
+	{
+		mlx_destroy_image(game->mlx->ptr, game->mlx->img);
+		game->mlx->img = NULL;
+		while (i < 5)
+		{
+			mlx_destroy_image(game->mlx->ptr, game->tex[i].ptr);
+			i++;
+		}
+	}
+	free(game->mlx->ptr);
+	exit(0);
+}

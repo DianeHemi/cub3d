@@ -51,6 +51,15 @@ int	ft_check_args(int argc, char **argv, int *save_opt)
 	}
 }
 
+int	ft_launch_mlx(t_mlx *mlx, t_config *config)
+{
+	if ((mlx->ptr = mlx_init()) == NULL)
+		return (ft_errors("Error\nInitialisation failed.\n"));
+	if (!(ft_init_image(config, mlx)))
+		return (ft_errors("Error\nImage initialisation failed.\n"));
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	int			save_opt;

@@ -40,17 +40,13 @@ int	ft_adjust_resolution(t_mlx *mlx, t_config *config)
 	}
 }
 
-int	ft_launch_mlx(t_mlx *mlx, t_config *config)
+int	ft_launch_img(t_mlx *mlx, t_config *config)
 {
-	if ((mlx->ptr = mlx_init()) == NULL)
-		return (ft_errors("Error\nInitialisation failed.\n"));
 	if (!ft_adjust_resolution(mlx, config))
 		return (ft_errors("Error\nResizing the window failed.\n"));
 	if (!(mlx->win = mlx_new_window(mlx->ptr, config->width,
 			config->height, "Cub3D")))
 		return (ft_errors("Error\nWindow couldn't be initialised.\n"));
-	if (!(ft_init_image(config, mlx)))
-		return (ft_errors("Error\nImage initialisation failed.\n"));
 	return (1);
 }
 
@@ -77,14 +73,15 @@ int	ft_launch_prog(t_config *config, t_mlx *mlx, int save_opt)
 		return (ft_errors("Error\nMemory allocation failed.\n"));
 	ft_get_pos_sprite(&sprite, config);
 	game.sprite = &sprite;
-	if (!(ft_init_textures(config, &game, tex, mlx)))
-		return (ft_errors("Error\nTexture file can't be initialised.\n"));
-	if (!ft_store_struct(config, &ray, mlx, &game))
-		return (ft_errors("Error\nStucture storage failed.\n"));
+	if (!(ft_init_textures(config, &game, tex, mlx))
+		|| !ft_store_struct(config, &ray, mlx, &game))
+		return (ft_errors("Error\nStructure initialisation failed.\n"));
 	ft_init_move(&move, &game);
 	ft_init_player_pos(game.config, game.ray);
 	if (save_opt == 1)
 		ft_save(&game);
+	if (!ft_launch_img(mlx, game.config))
+		return (ft_errors("Error\nMLX initialisation failed.\n"));
 	mlx_hook(mlx->win, 2, 1L << 0, ft_keypress, &game);
 	mlx_hook(mlx->win, 3, 1L << 1, ft_keyrelease, &game);
 	mlx_hook(mlx->win, EXIT_BTN, 1L << 17, ft_exit, &game);

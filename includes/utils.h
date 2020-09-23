@@ -20,6 +20,7 @@
 */
 void		ft_free_tab(char **str);
 int			ft_exit(t_game *game);
+int			ft_exit_save(t_game *game);
 void		ft_free_tex(t_config *config);
 
 /*

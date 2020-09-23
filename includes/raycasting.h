@@ -224,7 +224,7 @@ typedef struct	s_save
 /*
 *** Fonctions
 */
-int				ft_launch_mlx(t_mlx *mlx, t_config *config);
+int				ft_init_image(t_config *config, t_mlx *mlx);
 int				ft_launch_prog(t_config *config, t_mlx *mlx, int save_opt);
 int				ft_main_loop(t_game *game);
 

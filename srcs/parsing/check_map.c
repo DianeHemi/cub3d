@@ -53,8 +53,6 @@ int	ft_check_sides(t_config *config)
 		last = ft_strlen(config->map[y]) - 1;
 		while (last > 0 && !ft_strchr("012NSEW", config->map[y][last]))
 			last--;
-		if (first >= last)
-			return (1);
 		if (config->map[y][first] != '1' || config->map[y][last] != '1')
 			return (0);
 		y++;

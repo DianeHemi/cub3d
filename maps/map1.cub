@@ -1,14 +1,14 @@
-R 800 600
+R 800 620
 
-NO textures/WoodbrickD.xpm
-SO textures/wood.xpm
-WE textures/WoodbrickeagleD.xpm
-EA textures/WoodbrickswasD.xpm
+NO textures/002-rooftiles1.xpm
+SO textures/002-rooftiles3.xpm
+WE textures/002-rooftiles8.xpm
+EA textures/StoneUWD.XPM
 
-S textures/barrel.xpm
+S textures/pillar.XPM
 
-F 0,0,50
-C 50,20,30
+F 20,22,20
+C 40,38,41
 
 
 

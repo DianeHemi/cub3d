@@ -48,7 +48,7 @@ int		ft_keyrelease(int keycode, t_game *game)
 	return (0);
 }
 
-void	ft_move_rotte(t_move *mv, t_ray *r)
+void	ft_move_rot(t_move *mv, t_ray *r)
 {
 	double old_dir_x;
 	double old_plane_x;
@@ -120,5 +120,5 @@ void	ft_move_player(t_move *move, t_ray *ray, t_config *config)
 			ray->pos.y -= ray->dir.y * move->mv_spd;
 	}
 	ft_move_sideway(move, ray, config);
-	ft_move_rotte(move, ray);
+	ft_move_rot(move, ray);
 }

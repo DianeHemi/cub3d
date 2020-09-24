@@ -37,8 +37,8 @@ void	ft_init_move(t_move *move, t_game *game)
 	move->right = 0;
 	move->turn_l = 0;
 	move->turn_r = 0;
-	move->mv_spd = 0.04;
-	move->rot_spd = 0.05;
+	move->mv_spd = 0.03;
+	move->rot_spd = 0.04;
 	game->move = move;
 }
 

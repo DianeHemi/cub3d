@@ -85,7 +85,7 @@ all: $(NAME)
 .c.o:
 	$(CC) $(INC_ALL) $(ENV) $(CFLAGS) -g -c $< -o ${<:.c=.o} 
 
-$(NAME): $(LIB) $(OBJS)
+$(NAME): $(OBJS)
 	$(MAKE) -C $(LIBPATH)
 	$(MAKE) -C $(MLX_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(INC_ALL) -o $@ $(MLX) -L$(LIBPATH) -lft
